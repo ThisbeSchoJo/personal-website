@@ -245,14 +245,17 @@ const TimelinePage: React.FC = () => {
                                   {isExpanded ? "−" : "+"}
                                 </span>
                               </div>
-                              {isExpanded && (
+                            </div>
+                            {isExpanded && (
+                              <>
+                                <div className="timeline-connector-line"></div>
                                 <div className="timeline-entry-details">
                                   <p className="timeline-entry-description">
                                     {event.description}
                                   </p>
                                 </div>
-                              )}
-                            </div>
+                              </>
+                            )}
                           </div>
                         </div>
                       );
