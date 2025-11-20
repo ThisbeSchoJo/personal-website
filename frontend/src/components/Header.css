@@ -60,6 +60,7 @@
   display: flex;
   gap: 32px;
   align-items: center;
+  flex-wrap: nowrap;
 }
 
 .nav-link {

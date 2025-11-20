@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
 import './Header.css';
 
 interface HeaderProps {
@@ -52,6 +53,7 @@ const Header: React.FC<HeaderProps> = ({ name, title }) => {
           >
             contact
           </Link>
+          <ThemeToggle />
         </nav>
       </div>
       <div className="hero-section">

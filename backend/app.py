@@ -5,66 +5,183 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Sample portfolio data
+# Portfolio data
 portfolio_data = {
-    "name": "Your Name",
-    "title": "Full Stack Developer",
-    "bio": "Passionate developer with expertise in TypeScript, JavaScript, Python, and React.",
-    "email": "your.email@example.com",
-    "github": "https://github.com/yourusername",
-    "linkedin": "https://linkedin.com/in/yourusername",
+    "name": "Thisbe Scholfield-Johnson",
+    "title": "Software Engineer / Full-Stack Developer",
+    "bio": "Full-stack developer experienced in Python with Flask and JavaScript with a background in STEM research and consulting. Possess strong skills in creative problem-solving and user-centered thinking that help innovative, experience-driven companies build intuitive and meaningful applications.",
+    "email": "thisbeschojo@gmail.com",
+    "phone": "417-389-4611",
+    "location": "Brooklyn, New York",
+    "github": "https://github.com/thisbeschojo",
+    "linkedin": "https://linkedin.com/in/thisbeschojo",
     "projects": [
         {
             "id": 1,
-            "title": "Project 1",
-            "description": "A full-stack web application built with React and Flask.",
-            "technologies": ["React", "TypeScript", "Flask", "Python"],
-            "github": "https://github.com/yourusername/project1",
-            "demo": "https://project1-demo.com",
-            "image": "https://via.placeholder.com/400x300/667eea/ffffff?text=Project+1"
+            "title": "Build a Bike with Tadej",
+            "description": "App where users build a bike with Tadej Pogacar. Built with a React frontend and Flask backend, using SQLAlchemy for ORM and SQLite for storage. Features OpenAI integration to simulate conversation with Tadej and an online shopping feature.",
+            "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy", "SQLite", "OpenAI"],
+            "github": "https://github.com/thisbeschojo/build-a-bike-with-tadej",
+            "demo": None,
+            "image": "https://via.placeholder.com/400x300/667eea/ffffff?text=Build+a+Bike+with+Tadej",
+            "status": "Not yet started"
         },
         {
             "id": 2,
-            "title": "Project 2",
-            "description": "A RESTful API service with Python and Flask.",
-            "technologies": ["Python", "Flask", "PostgreSQL"],
-            "github": "https://github.com/yourusername/project2",
+            "title": "Chickens",
+            "description": "A location-based app that connects local egg sellers with nearby buyers. The app empowers backyard farmers and small-scale producers to share surplus eggs while promoting transparency around space and sourcing ethics.",
+            "technologies": ["React", "JavaScript", "Flask", "Python"],
+            "github": "https://github.com/thisbeschojo/chickens",
             "demo": None,
-            "image": "https://via.placeholder.com/400x300/764ba2/ffffff?text=Project+2"
+            "image": "https://via.placeholder.com/400x300/764ba2/ffffff?text=Chickens",
+            "status": "In Progress"
         },
         {
             "id": 3,
-            "title": "Project 3",
-            "description": "A modern web app with React and TypeScript.",
-            "technologies": ["React", "TypeScript", "Node.js"],
-            "github": "https://github.com/yourusername/project3",
-            "demo": "https://project3-demo.com",
-            "image": "https://via.placeholder.com/400x300/f5c2c2/1a1a1a?text=Project+3"
+            "title": "Happy Food",
+            "description": "MCP server analyzing the mood effects of foods based on nutritional and neurotransmitter data. Built in TypeScript + Node.js, integrating the USDA FoodData Central API and a local fallback database for mood analysis.",
+            "technologies": ["TypeScript", "Node.js", "USDA FoodData API"],
+            "github": "https://github.com/thisbeschojo/happy-food",
+            "demo": None,
+            "image": "https://via.placeholder.com/400x300/f5c2c2/1a1a1a?text=Happy+Food"
+        },
+        {
+            "id": 4,
+            "title": "MoodRing",
+            "description": "AI-powered journal app that analyzes emotions and creates visual mood representations through color-coded entries. Full-stack journaling platform using React.js frontend with Flask/SQLAlchemy backend, implementing user authentication and RESTful APIs.",
+            "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy", "OpenAI GPT-3.5"],
+            "github": "https://github.com/thisbeschojo/moodring",
+            "demo": None,
+            "image": "https://via.placeholder.com/400x300/667eea/ffffff?text=MoodRing"
+        },
+        {
+            "id": 5,
+            "title": "Still Strava",
+            "description": "App inspired by Strava that allows users to log, share, and interact with outdoor activities. Full-stack social platform using React.js frontend with Flask/SQLAlchemy backend, implementing JWT authentication and RESTful APIs.",
+            "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy", "JWT", "Google Maps API", "Chart.js"],
+            "github": "https://github.com/thisbeschojo/still-strava",
+            "demo": None,
+            "image": "https://via.placeholder.com/400x300/764ba2/ffffff?text=Still+Strava"
+        },
+        {
+            "id": 6,
+            "title": "Firefly Finder",
+            "description": "Interactive map-based app for logging and exploring firefly sightings. Full-stack citizen science platform using React.js frontend with Flask/SQLAlchemy backend, implementing user authentication and RESTful APIs for firefly sighting documentation.",
+            "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy", "Google Maps API", "iNaturalist API"],
+            "github": "https://github.com/thisbeschojo/firefly-finder",
+            "demo": None,
+            "image": "https://via.placeholder.com/400x300/f5c2c2/1a1a1a?text=Firefly+Finder"
+        },
+        {
+            "id": 7,
+            "title": "Natural Dye Lab",
+            "description": "Guides users in creating and experimenting with natural dyes. Developed a Flask API backend with three models (DyeMaterial, Mordant, DyeResult) and full CRUD functionality. Implemented form validation and multiple React Router routes for a dynamic user experience.",
+            "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy"],
+            "github": "https://github.com/thisbeschojo/natural-dye-lab",
+            "demo": None,
+            "image": "https://via.placeholder.com/400x300/667eea/ffffff?text=Natural+Dye+Lab"
+        },
+        {
+            "id": 8,
+            "title": "Your Life in Weeks",
+            "description": "CLI tool to visualize life in weeks, helping users track time and set meaningful goals. Built a CLI application with SQLAlchemy ORM for efficient user data and event management.",
+            "technologies": ["Python", "SQLAlchemy", "CLI"],
+            "github": "https://github.com/thisbeschojo/your-life-in-weeks",
+            "demo": None,
+            "image": "https://via.placeholder.com/400x300/764ba2/ffffff?text=Your+Life+in+Weeks"
+        },
+        {
+            "id": 9,
+            "title": "The Abyss Gazes Back",
+            "description": "An interactive game where users navigate moral dilemmas and are categorized into archetypes. Set up json-server for GET and POST requests, enabling data submission and retrieval.",
+            "technologies": ["React", "JavaScript", "json-server"],
+            "github": "https://github.com/thisbeschojo/the-abyss-gazes-back",
+            "demo": None,
+            "image": "https://via.placeholder.com/400x300/f5c2c2/1a1a1a?text=The+Abyss+Gazes+Back"
         }
     ],
     "skills": {
-        "frontend": ["React", "TypeScript", "JavaScript", "HTML", "CSS"],
-        "backend": ["Python", "Flask", "Node.js"],
-        "tools": ["Git", "Docker", "PostgreSQL", "MongoDB"]
+        "frontend": ["React", "JavaScript", "CSS", "HTML"],
+        "backend": ["Python", "Flask", "Node.js", "RESTful APIs"],
+        "tools": ["SQL", "PyTest", "Mocha", "Git", "GitHub"]
     },
     "timeline": [
         {
-            "season": "Summer",
-            "year": 2023,
+            "season": "Winter",
+            "year": 2025,
             "entries": [
                 {
-                    "id": "summer-2023-work",
-                    "category": "Work",
-                    "title": "Software Engineering Intern",
-                    "description": "Worked as a software engineering intern at a tech company, focusing on full-stack development.",
+                    "id": "winter-2025-education",
+                    "category": "Education",
+                    "title": "Full Stack Web Development at Flatiron School",
+                    "description": "Started intensive Full Stack Web Development program in Python with Flask and JavaScript in January 2025 in New York, NY.",
                     "details": [
-                        "Developed new features using React and TypeScript for the company's web application",
-                        "Collaborated with cross-functional teams including designers and product managers",
-                        "Improved application performance by optimizing database queries",
-                        "Participated in code reviews and agile development practices",
-                        "Presented weekly updates to the engineering team"
+                        "Began studying Python with Flask and JavaScript/React",
+                        "Started building full-stack projects with React frontends and Flask backends",
+                        "Learning RESTful API design, database management with SQLAlchemy, and authentication systems"
                     ],
                     "isNew": True
+                }
+            ]
+        },
+        {
+            "season": "Spring",
+            "year": 2025,
+            "entries": [
+                {
+                    "id": "spring-2025-work-tech-elevate",
+                    "category": "Work",
+                    "title": "Intern - Web Development at TechElevate",
+                    "description": "Remote internship developing and maintaining TechElevate's website and creating websites for independent companies as part of a fundraiser for TechElevate.",
+                    "details": [
+                        "Developed and maintained TechElevate's website",
+                        "Created websites for independent companies as part of a fundraiser",
+                        "Gained experience in client-facing web development projects"
+                    ],
+                    "isNew": True
+                },
+                {
+                    "id": "spring-2025-freelance",
+                    "category": "Work",
+                    "title": "Freelance Web Developer",
+                    "description": "Working with nonprofits to build and optimize WordPress sites, focusing on custom navigation, community features, and accessibility.",
+                    "details": [
+                        "Teaching While Queer: Developing WordPress site for LGBTQ+ educator nonprofit, building custom navigation and community features using BuddyX and BuddyPress",
+                        "Optimizing site UI with HTML, CSS, and JavaScript for accessibility, performance, and responsiveness",
+                        "Shark Stewards: Supporting WordPress development for marine conservation nonprofit, improving site performance, structure, and audience engagement"
+                    ],
+                    "isNew": True
+                },
+                {
+                    "id": "spring-2025-education",
+                    "category": "Education",
+                    "title": "Full Stack Web Development at Flatiron School",
+                    "description": "Continued Full Stack Web Development program, completed in May 2025 in New York, NY.",
+                    "details": [
+                        "Completed Python with Flask and JavaScript/React coursework",
+                        "Finished multiple full-stack projects with React frontends and Flask backends",
+                        "Mastered RESTful API design, database management with SQLAlchemy, and authentication systems",
+                        "Graduated from comprehensive bootcamp program focusing on modern web development"
+                    ],
+                    "isNew": True
+                }
+            ]
+        },
+        {
+            "season": "Summer",
+            "year": 2024,
+            "entries": [
+                {
+                    "id": "summer-2024-work-mkg",
+                    "category": "Work",
+                    "title": "Associate - Healthcare Consulting & Market Research at Medical Knowledge Group",
+                    "description": "Worked in New York, NY from April 2023 to July 2024, managing research project plans and delivering strategic market insights for healthcare clients.",
+                    "details": [
+                        "Managed research project plans, including vendor coordination, budget tracking, and scheduling",
+                        "Led quantitative and qualitative research, delivering strategic market insights and recommendations",
+                        "Collaborated with healthcare industry clients to understand market dynamics and trends"
+                    ],
+                    "isNew": False
                 }
             ]
         },
@@ -73,48 +190,32 @@ portfolio_data = {
             "year": 2023,
             "entries": [
                 {
-                    "id": "spring-2023-classes",
-                    "category": "Classes",
-                    "title": "Advanced Web Development",
-                    "description": "Completed coursework in advanced web development and modern JavaScript frameworks.",
+                    "id": "spring-2023-work-mkg",
+                    "category": "Work",
+                    "title": "Associate - Healthcare Consulting & Market Research at Medical Knowledge Group",
+                    "description": "Started position in New York, NY in April 2023, managing research project plans and delivering strategic market insights for healthcare clients.",
                     "details": [
-                        "Built several full-stack applications using React and Node.js",
-                        "Learned about state management with Redux and Context API",
-                        "Explored server-side rendering with Next.js",
-                        "Completed final project: an e-commerce platform with payment integration"
+                        "Managed research project plans, including vendor coordination, budget tracking, and scheduling",
+                        "Led quantitative and qualitative research, delivering strategic market insights and recommendations",
+                        "Collaborated with healthcare industry clients to understand market dynamics and trends"
                     ],
                     "isNew": False
-                },
-                {
-                    "id": "spring-2023-extracurriculars",
-                    "category": "Extracurriculars",
-                    "title": "Hackathon Organizer",
-                    "description": "Organized and participated in multiple hackathons, helping create a vibrant developer community.",
-                    "details": [
-                        "Planned and executed a 24-hour hackathon with over 200 participants",
-                        "Coordinated with sponsors and mentors",
-                        "Mentored beginner developers and helped them build their first projects",
-                        "Won first place in the university's annual coding competition"
-                    ],
-                    "isNew": True
                 }
             ]
         },
         {
             "season": "Winter",
-            "year": 2023,
+            "year": 2021,
             "entries": [
                 {
-                    "id": "winter-2023-work",
-                    "category": "Work",
-                    "title": "Product Manager",
-                    "description": "Worked as a product manager, leading feature development and user research initiatives.",
+                    "id": "winter-2021-education-georgetown",
+                    "category": "Education",
+                    "title": "Biotechnology, Biosciences at Georgetown University",
+                    "description": "Graduated with degree in Biotechnology, Biosciences from Georgetown University in Washington, D.C. in December 2021.",
                     "details": [
-                        "Conducted user interviews and analyzed feedback to inform product decisions",
-                        "Wrote product requirements documents (PRDs) for new features",
-                        "Collaborated with engineering and design teams throughout the development lifecycle",
-                        "Launched two major features that increased user engagement by 30%",
-                        "Presented product strategy to company leadership"
+                        "Studied biotechnology and biosciences",
+                        "Developed strong foundation in STEM research and scientific methodology",
+                        "Completed degree program in December 2021"
                     ],
                     "isNew": False
                 }
@@ -122,31 +223,36 @@ portfolio_data = {
         },
         {
             "season": "Fall",
-            "year": 2022,
+            "year": 2020,
             "entries": [
                 {
-                    "id": "fall-2022-classes",
-                    "category": "Classes",
-                    "title": "Machine Learning Fundamentals",
-                    "description": "Studied machine learning algorithms and their applications in real-world problems.",
+                    "id": "fall-2020-education-westminster",
+                    "category": "Education",
+                    "title": "Psychology at Westminster University",
+                    "description": "Studied Psychology at Westminster University in London, England.",
                     "details": [
-                        "Implemented various ML algorithms from scratch in Python",
-                        "Completed projects on image classification and natural language processing",
-                        "Collaborated on a research project analyzing social media sentiment",
-                        "Final project: recommendation system using collaborative filtering"
+                        "Explored psychological principles and research methods",
+                        "Gained international academic experience studying in London",
+                        "Began studies in September 2019"
                     ],
                     "isNew": False
-                },
+                }
+            ]
+        },
+        {
+            "season": "Spring",
+            "year": 2018,
+            "entries": [
                 {
-                    "id": "fall-2022-work",
-                    "category": "Work",
-                    "title": "Frontend Developer Intern",
-                    "description": "Interned as a frontend developer, building user interfaces and improving user experience.",
+                    "id": "spring-2018-education-wake-forest",
+                    "category": "Education",
+                    "title": "Biology, Chemistry (minor) at Wake Forest University",
+                    "description": "Graduated from Wake Forest University in Winston-Salem, NC in May 2018 with a degree in Biology and minor in Chemistry.",
                     "details": [
-                        "Developed responsive web components using React and CSS",
-                        "Fixed bugs and improved existing features based on user feedback",
-                        "Participated in daily stand-ups and sprint planning meetings",
-                        "Contributed to the company's design system documentation"
+                        "Focused on biological sciences and chemistry",
+                        "Developed strong analytical and research skills",
+                        "Built foundation for future work in biotechnology and STEM fields",
+                        "Graduated in May 2018"
                     ],
                     "isNew": False
                 }

@@ -6,6 +6,7 @@ export interface Project {
   github: string;
   demo: string | null;
   image?: string;
+  status?: string;
 }
 
 export interface Skills {
@@ -34,6 +35,8 @@ export interface PortfolioData {
   title: string;
   bio: string;
   email: string;
+  phone?: string;
+  location?: string;
   github: string;
   linkedin: string;
   projects: Project[];

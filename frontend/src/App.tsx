@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
+import { ThemeProvider } from './contexts/ThemeContext';
 import Header from './components/Header';
 import AboutPage from './pages/AboutPage';
 import ProjectsPage from './pages/ProjectsPage';
@@ -51,21 +52,23 @@ function App() {
   }
 
   return (
-    <Router>
-      <div className="App">
-        <Header name={portfolioData.name} title={portfolioData.title} />
-        <main>
-          <Routes>
-            <Route path="/" element={<AboutPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/skills" element={<SkillsPage />} />
-            <Route path="/timeline" element={<TimelinePage />} />
-            <Route path="/contact" element={<ContactPage />} />
-          </Routes>
-        </main>
-      </div>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <div className="App">
+          <Header name={portfolioData.name} title={portfolioData.title} />
+          <main>
+            <Routes>
+              <Route path="/" element={<AboutPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/skills" element={<SkillsPage />} />
+              <Route path="/timeline" element={<TimelinePage />} />
+              <Route path="/contact" element={<ContactPage />} />
+            </Routes>
+          </main>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 

@@ -22,6 +22,29 @@
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
   --border-radius: 12px;
+  --toggle-bg: #f5f5f5;
+  --toggle-bg-hover: #e8e8e8;
+  --toggle-border: #e0e0e0;
+}
+
+[data-theme="dark"] {
+  --header-bg: #1a1a1a;
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-light: #808080;
+  --accent-pink: #c98787;
+  --accent-blue: #6bb3ff;
+  --border-color: #2a2a2a;
+  --card-bg: #1e1e1e;
+  --card-border: #2a2a2a;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --toggle-bg: #2a2a2a;
+  --toggle-bg-hover: #353535;
+  --toggle-border: #3a3a3a;
 }
 
 html {
