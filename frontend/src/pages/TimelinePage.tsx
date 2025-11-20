@@ -157,112 +157,131 @@ const TimelinePage: React.FC = () => {
           </p>
           <div className="timeline-wrapper">
             <div className="timeline-scale">
-              {yearMarkers.map((year, index) => {
-                // Position year marker at the start of the year (use same calculation as events)
-                const totalYears = yearRange.end - yearRange.start + 1;
-                const yearIndex = year - yearRange.start;
-                const normalYearPercent = 100 / (totalYears - 1 + 1.5);
-                const yearStartPosition =
-                  year === yearRange.end
-                    ? (totalYears - 1) * normalYearPercent
-                    : yearIndex * normalYearPercent;
+              {yearMarkers
+                .slice()
+                .reverse()
+                .map((year, index) => {
+                  // Position year marker at the start of the year (use same calculation as events)
+                  // Reverse the position so 2026 is at top (100%) and 2018 is at bottom (0%)
+                  const totalYears = yearRange.end - yearRange.start + 1;
+                  const yearIndex = year - yearRange.start;
+                  const normalYearPercent = 100 / (totalYears - 1 + 1.5);
+                  let yearStartPosition =
+                    year === yearRange.end
+                      ? (totalYears - 1) * normalYearPercent
+                      : yearIndex * normalYearPercent;
+                  // Invert position: 100% becomes 0%, 0% becomes 100%
+                  yearStartPosition = 100 - yearStartPosition;
 
-                const yearEvents = eventsByYear[year] || [];
+                  const yearEvents = eventsByYear[year] || [];
 
-                // Sort events by month if provided, otherwise maintain order
-                const sortedYearEvents = [...yearEvents].sort((a, b) => {
-                  if (a.month && b.month) return a.month - b.month;
-                  if (a.month) return -1;
-                  if (b.month) return 1;
-                  return 0;
-                });
+                  // Sort events by month if provided, otherwise maintain order
+                  // Reverse so most recent events appear at top when timeline is inverted
+                  const sortedYearEvents = [...yearEvents].sort((a, b) => {
+                    if (a.month && b.month) return b.month - a.month; // Reverse: newer months first
+                    if (a.month) return 1;
+                    if (b.month) return -1;
+                    return 0;
+                  });
 
-                return (
-                  <div key={year}>
-                    <div
-                      className="timeline-year-marker"
-                      style={{
-                        top: `${yearStartPosition}%`,
-                      }}
-                    >
-                      <div className="timeline-year-tick"></div>
-                      <span className="timeline-year-label">{year}</span>
-                    </div>
-                    {sortedYearEvents.map((event, eventIndex) => {
-                      const isExpanded = expandedEntries.has(event.id);
+                  return (
+                    <div key={year}>
+                      <div
+                        className="timeline-year-marker"
+                        style={{
+                          top: `${yearStartPosition}%`,
+                        }}
+                      >
+                        <div className="timeline-year-tick"></div>
+                        <span className="timeline-year-label">{year}</span>
+                      </div>
+                      {sortedYearEvents.map((event, eventIndex) => {
+                        const isExpanded = expandedEntries.has(event.id);
 
-                      // Calculate the year's range on the timeline
-                      const totalYears = yearRange.end - yearRange.start + 1;
-                      const normalYearPercent = 100 / (totalYears - 1 + 1.5);
-                      const yearStart =
-                        event.year === yearRange.end
-                          ? (totalYears - 1) * normalYearPercent
-                          : (event.year - yearRange.start) * normalYearPercent;
-                      const yearEnd =
-                        event.year === yearRange.end
-                          ? 100
-                          : (event.year - yearRange.start + 1) *
-                            normalYearPercent;
-                      const yearRangePercent = yearEnd - yearStart;
+                        // Calculate the year's range on the timeline
+                        const totalYears = yearRange.end - yearRange.start + 1;
+                        const normalYearPercent = 100 / (totalYears - 1 + 1.5);
+                        let yearStart =
+                          event.year === yearRange.end
+                            ? (totalYears - 1) * normalYearPercent
+                            : (event.year - yearRange.start) *
+                              normalYearPercent;
+                        let yearEnd =
+                          event.year === yearRange.end
+                            ? 100
+                            : (event.year - yearRange.start + 1) *
+                              normalYearPercent;
 
-                      // Calculate position: evenly space events within the year
-                      // Divide the year by number of events, place each in the middle of its segment
-                      const numEvents = sortedYearEvents.length;
-                      // Position at (i + 0.5) / N - this places events evenly spaced
-                      // For 1 event: 0.5 (middle)
-                      // For 2 events: 0.25, 0.75
-                      // For 3 events: 0.167, 0.5, 0.833
-                      const positionWithinYear = (eventIndex + 0.5) / numEvents;
-                      const eventPosition =
-                        yearStart + positionWithinYear * yearRangePercent;
+                        // Invert positions: 100% becomes 0%, 0% becomes 100%
+                        // Need to swap yearStart and yearEnd when inverting
+                        const invertedYearStart = 100 - yearEnd;
+                        const invertedYearEnd = 100 - yearStart;
+                        yearStart = invertedYearStart;
+                        yearEnd = invertedYearEnd;
 
-                      return (
-                        <div
-                          key={event.id}
-                          className={`timeline-event-on-scale ${
-                            !event.isNew ? "greyed-out" : ""
-                          } ${isExpanded ? "expanded" : ""}`}
-                          style={{
-                            top: `${eventPosition}%`,
-                          }}
-                        >
-                          <div className="timeline-event-bullet"></div>
-                          <div className="timeline-event-popup">
-                            <div
-                              className="timeline-entry"
-                              onClick={() => toggleEntry(event.id)}
-                            >
-                              <div className="timeline-entry-header">
-                                <div className="timeline-entry-left">
-                                  <span className="timeline-category-badge">
-                                    {event.category}
+                        const yearRangePercent = yearEnd - yearStart;
+
+                        // Calculate position: evenly space events within the year
+                        // Divide the year by number of events, place each in the middle of its segment
+                        // Since timeline is inverted, reverse eventIndex so newest events are at top
+                        const numEvents = sortedYearEvents.length;
+                        const reversedIndex = numEvents - 1 - eventIndex;
+                        // Position at (i + 0.5) / N - this places events evenly spaced
+                        // For 1 event: 0.5 (middle)
+                        // For 2 events: 0.25, 0.75
+                        // For 3 events: 0.167, 0.5, 0.833
+                        const positionWithinYear =
+                          (reversedIndex + 0.5) / numEvents;
+                        const eventPosition =
+                          yearStart + positionWithinYear * yearRangePercent;
+
+                        return (
+                          <div
+                            key={event.id}
+                            className={`timeline-event-on-scale ${
+                              !event.isNew ? "greyed-out" : ""
+                            } ${isExpanded ? "expanded" : ""}`}
+                            style={{
+                              top: `${eventPosition}%`,
+                            }}
+                          >
+                            <div className="timeline-event-bullet"></div>
+                            <div className="timeline-event-popup">
+                              <div
+                                className="timeline-entry"
+                                onClick={() => toggleEntry(event.id)}
+                              >
+                                <div className="timeline-entry-header">
+                                  <div className="timeline-entry-left">
+                                    <span className="timeline-category-badge">
+                                      {event.category}
+                                    </span>
+                                    <h3 className="timeline-entry-title">
+                                      {event.title}
+                                    </h3>
+                                  </div>
+                                  <span className="timeline-expand-icon">
+                                    {isExpanded ? "−" : "+"}
                                   </span>
-                                  <h3 className="timeline-entry-title">
-                                    {event.title}
-                                  </h3>
                                 </div>
-                                <span className="timeline-expand-icon">
-                                  {isExpanded ? "−" : "+"}
-                                </span>
                               </div>
+                              {isExpanded && (
+                                <>
+                                  <div className="timeline-connector-line"></div>
+                                  <div className="timeline-entry-details">
+                                    <p className="timeline-entry-description">
+                                      {event.description}
+                                    </p>
+                                  </div>
+                                </>
+                              )}
                             </div>
-                            {isExpanded && (
-                              <>
-                                <div className="timeline-connector-line"></div>
-                                <div className="timeline-entry-details">
-                                  <p className="timeline-entry-description">
-                                    {event.description}
-                                  </p>
-                                </div>
-                              </>
-                            )}
                           </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                );
-              })}
+                        );
+                      })}
+                    </div>
+                  );
+                })}
               <div className="timeline-vertical-line"></div>
             </div>
           </div>
