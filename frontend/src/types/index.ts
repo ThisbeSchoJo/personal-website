@@ -22,10 +22,11 @@ export interface TimelineEntry {
   description: string;
   details?: string[];
   isNew?: boolean;
+  month?: number; // 1-12 for positioning within the year
 }
 
 export interface TimelineItem {
-  season: string;
+  season?: string;
   year: number;
   entries: TimelineEntry[];
 }
