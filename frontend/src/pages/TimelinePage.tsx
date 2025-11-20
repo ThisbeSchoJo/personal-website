@@ -161,17 +161,21 @@ const TimelinePage: React.FC = () => {
                 .slice()
                 .reverse()
                 .map((year, index) => {
-                  // Position year marker at the start of the year (use same calculation as events)
-                  // Reverse the position so 2026 is at top (100%) and 2018 is at bottom (0%)
-                  const totalYears = yearRange.end - yearRange.start + 1;
-                  const yearIndex = year - yearRange.start;
-                  const normalYearPercent = 100 / (totalYears - 1 + 1.5);
-                  let yearStartPosition =
-                    year === yearRange.end
-                      ? (totalYears - 1) * normalYearPercent
-                      : yearIndex * normalYearPercent;
-                  // Invert position: 100% becomes 0%, 0% becomes 100%
-                  yearStartPosition = 100 - yearStartPosition;
+                  // Position year marker at the start of the year
+                  // If it's the last year (2026), position at top (0%) without extra space
+                  let yearStartPosition;
+                  if (year === yearRange.end) {
+                    // Last year (2026) is just a marker at the top
+                    yearStartPosition = 0;
+                  } else {
+                    // Calculate position for other years, reversing so 2018 is at bottom
+                    const totalYears = yearRange.end - yearRange.start;
+                    const yearIndex = year - yearRange.start;
+                    const normalYearPercent = 100 / (totalYears - 1 + 1.5);
+                    yearStartPosition = yearIndex * normalYearPercent;
+                    // Invert position: 100% becomes 0%, 0% becomes 100%
+                    yearStartPosition = 100 - yearStartPosition;
+                  }
 
                   const yearEvents = eventsByYear[year] || [];
 
@@ -199,25 +203,28 @@ const TimelinePage: React.FC = () => {
                         const isExpanded = expandedEntries.has(event.id);
 
                         // Calculate the year's range on the timeline
-                        const totalYears = yearRange.end - yearRange.start + 1;
-                        const normalYearPercent = 100 / (totalYears - 1 + 1.5);
-                        let yearStart =
-                          event.year === yearRange.end
-                            ? (totalYears - 1) * normalYearPercent
-                            : (event.year - yearRange.start) *
-                              normalYearPercent;
-                        let yearEnd =
-                          event.year === yearRange.end
-                            ? 100
-                            : (event.year - yearRange.start + 1) *
-                              normalYearPercent;
+                        let yearStart, yearEnd;
+                        if (event.year === yearRange.end) {
+                          // Last year (2026) - shouldn't have events, but handle it anyway
+                          yearStart = 0;
+                          yearEnd = 0;
+                        } else {
+                          const totalYears = yearRange.end - yearRange.start;
+                          const normalYearPercent =
+                            100 / (totalYears - 1 + 1.5);
+                          yearStart =
+                            (event.year - yearRange.start) * normalYearPercent;
+                          yearEnd =
+                            (event.year - yearRange.start + 1) *
+                            normalYearPercent;
 
-                        // Invert positions: 100% becomes 0%, 0% becomes 100%
-                        // Need to swap yearStart and yearEnd when inverting
-                        const invertedYearStart = 100 - yearEnd;
-                        const invertedYearEnd = 100 - yearStart;
-                        yearStart = invertedYearStart;
-                        yearEnd = invertedYearEnd;
+                          // Invert positions: 100% becomes 0%, 0% becomes 100%
+                          // Need to swap yearStart and yearEnd when inverting
+                          const invertedYearStart = 100 - yearEnd;
+                          const invertedYearEnd = 100 - yearStart;
+                          yearStart = invertedYearStart;
+                          yearEnd = invertedYearEnd;
+                        }
 
                         const yearRangePercent = yearEnd - yearStart;
 
@@ -282,7 +289,12 @@ const TimelinePage: React.FC = () => {
                     </div>
                   );
                 })}
-              <div className="timeline-vertical-line"></div>
+              <div
+                className="timeline-vertical-line"
+                style={{
+                  top: `0%`, // Start at top since 2026 is at 0%
+                }}
+              ></div>
             </div>
           </div>
         </div>
