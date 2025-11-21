@@ -8,7 +8,7 @@ CORS(app)
 # Portfolio data
 portfolio_data = {
     "name": "Thisbe Scholfield-Johnson",
-    "title": "Software Engineer / Full-Stack Developer",
+    "title": "Software Engineer",
     "bio": "Full-stack developer experienced in Python with Flask and JavaScript with a background in STEM research and consulting. Possess strong skills in creative problem-solving and user-centered thinking that help innovative, experience-driven companies build intuitive and meaningful applications.",
     "email": "thisbeschojo@gmail.com",
     "phone": "417-389-4611",
@@ -22,7 +22,7 @@ portfolio_data = {
             "description": "App where users build a bike with Tadej Pogacar. Built with a React frontend and Flask backend, using SQLAlchemy for ORM and SQLite for storage. Features OpenAI integration to simulate conversation with Tadej and an online shopping feature.",
             "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy", "SQLite", "OpenAI"],
             "github": "https://github.com/thisbeschojo/build-a-bike-with-tadej",
-            "demo": None,
+            "demoVideo": None,
             "image": "https://via.placeholder.com/400x300/667eea/ffffff?text=Build+a+Bike+with+Tadej",
             "status": "Not yet started"
         },
@@ -32,7 +32,7 @@ portfolio_data = {
             "description": "A location-based app that connects local egg sellers with nearby buyers. The app empowers backyard farmers and small-scale producers to share surplus eggs while promoting transparency around space and sourcing ethics.",
             "technologies": ["React", "JavaScript", "Flask", "Python"],
             "github": "https://github.com/thisbeschojo/chickens",
-            "demo": None,
+            "demoVideo": None,
             "image": "https://via.placeholder.com/400x300/764ba2/ffffff?text=Chickens",
             "status": "In Progress"
         },
@@ -42,7 +42,7 @@ portfolio_data = {
             "description": "MCP server analyzing the mood effects of foods based on nutritional and neurotransmitter data. Built in TypeScript + Node.js, integrating the USDA FoodData Central API and a local fallback database for mood analysis.",
             "technologies": ["TypeScript", "Node.js", "USDA FoodData API"],
             "github": "https://github.com/thisbeschojo/happy-food",
-            "demo": None,
+            "demoVideo": "https://youtu.be/D6VTj3kSKYY?si=xcKVSUdVhTHOF3O2",
             "image": "https://via.placeholder.com/400x300/f5c2c2/1a1a1a?text=Happy+Food"
         },
         {
@@ -51,7 +51,7 @@ portfolio_data = {
             "description": "AI-powered journal app that analyzes emotions and creates visual mood representations through color-coded entries. Full-stack journaling platform using React.js frontend with Flask/SQLAlchemy backend, implementing user authentication and RESTful APIs.",
             "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy", "OpenAI GPT-3.5"],
             "github": "https://github.com/thisbeschojo/moodring",
-            "demo": None,
+            "demoVideo": "https://youtu.be/bG4ZhJL69BE?si=MrkOQnMnXmA8_ufy",
             "image": "https://via.placeholder.com/400x300/667eea/ffffff?text=MoodRing"
         },
         {
@@ -60,7 +60,7 @@ portfolio_data = {
             "description": "App inspired by Strava that allows users to log, share, and interact with outdoor activities. Full-stack social platform using React.js frontend with Flask/SQLAlchemy backend, implementing JWT authentication and RESTful APIs.",
             "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy", "JWT", "Google Maps API", "Chart.js"],
             "github": "https://github.com/thisbeschojo/still-strava",
-            "demo": None,
+            "demoVideo": "https://youtu.be/iDY6MuXFTGE?si=xFC3k54P1PN8VDwE",
             "image": "https://via.placeholder.com/400x300/764ba2/ffffff?text=Still+Strava"
         },
         {
@@ -69,7 +69,7 @@ portfolio_data = {
             "description": "Interactive map-based app for logging and exploring firefly sightings. Full-stack citizen science platform using React.js frontend with Flask/SQLAlchemy backend, implementing user authentication and RESTful APIs for firefly sighting documentation.",
             "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy", "Google Maps API", "iNaturalist API"],
             "github": "https://github.com/thisbeschojo/firefly-finder",
-            "demo": None,
+            "demoVideo": "https://youtu.be/wXEtFoRQyhs?si=zysyXjCuZcV28noX",
             "image": "https://via.placeholder.com/400x300/f5c2c2/1a1a1a?text=Firefly+Finder"
         },
         {
@@ -78,7 +78,7 @@ portfolio_data = {
             "description": "Guides users in creating and experimenting with natural dyes. Developed a Flask API backend with three models (DyeMaterial, Mordant, DyeResult) and full CRUD functionality. Implemented form validation and multiple React Router routes for a dynamic user experience.",
             "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy"],
             "github": "https://github.com/thisbeschojo/natural-dye-lab",
-            "demo": None,
+            "demoVideo": "https://youtu.be/wu4RoJ_DpQU?si=oFPNedMcrXbxreEp",
             "image": "https://via.placeholder.com/400x300/667eea/ffffff?text=Natural+Dye+Lab"
         },
         {
@@ -87,7 +87,7 @@ portfolio_data = {
             "description": "CLI tool to visualize life in weeks, helping users track time and set meaningful goals. Built a CLI application with SQLAlchemy ORM for efficient user data and event management.",
             "technologies": ["Python", "SQLAlchemy", "CLI"],
             "github": "https://github.com/thisbeschojo/your-life-in-weeks",
-            "demo": None,
+            "demoVideo": "https://youtu.be/TV8Ulysskbw?si=DYJr4IJITatYua1L",
             "image": "https://via.placeholder.com/400x300/764ba2/ffffff?text=Your+Life+in+Weeks"
         },
         {
@@ -96,7 +96,7 @@ portfolio_data = {
             "description": "An interactive game where users navigate moral dilemmas and are categorized into archetypes. Set up json-server for GET and POST requests, enabling data submission and retrieval.",
             "technologies": ["React", "JavaScript", "json-server"],
             "github": "https://github.com/thisbeschojo/the-abyss-gazes-back",
-            "demo": None,
+            "demoVideo": "https://youtu.be/MqlsRGpNook?si=4bATnjXqx4W6091M",
             "image": "https://via.placeholder.com/400x300/f5c2c2/1a1a1a?text=The+Abyss+Gazes+Back"
         }
     ],

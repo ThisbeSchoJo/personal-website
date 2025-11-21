@@ -5,6 +5,7 @@ export interface Project {
   technologies: string[];
   github: string;
   demo: string | null;
+  demoVideo?: string | null;
   image?: string;
   status?: string;
 }

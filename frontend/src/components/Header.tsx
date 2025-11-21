@@ -10,7 +10,10 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ name, title }) => {
   const location = useLocation();
-  const isGlobePage = location.pathname === "/globe";
+  
+  // Pages where hero section should be hidden
+  const pagesWithoutHero = ["/globe", "/contact", "/timeline", "/skills", "/projects", "/portfolio"];
+  const shouldShowHero = !pagesWithoutHero.includes(location.pathname);
 
   return (
     <header className="header">
@@ -35,12 +38,12 @@ const Header: React.FC<HeaderProps> = ({ name, title }) => {
             about
           </Link>
           <Link
-            to="/projects"
+            to="/portfolio"
             className={`nav-link ${
-              location.pathname === "/projects" ? "active" : ""
+              location.pathname === "/portfolio" || location.pathname === "/projects" ? "active" : ""
             }`}
           >
-            projects
+            portfolio
           </Link>
           <Link
             to="/skills"
@@ -77,7 +80,7 @@ const Header: React.FC<HeaderProps> = ({ name, title }) => {
           <ThemeToggle />
         </nav>
       </div>
-      {!isGlobePage && (
+      {shouldShowHero && (
         <div className="hero-section">
           <h1 className="hero-title">{title}</h1>
         </div>

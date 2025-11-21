@@ -10,7 +10,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
   return (
     <section className="section projects-section">
       <div className="section-content">
-        <h2 className="section-title">Projects</h2>
+        <h2 className="section-title">Portfolio</h2>
         <p className="projects-intro">
           I love planning events, making websites, and working on projects. Here you will find a collection of my work across internships, classes, personal projects, and extracurriculars.
         </p>
@@ -45,6 +45,16 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
                 >
                   GitHub
                 </a>
+                {project.demoVideo && (
+                  <a
+                    href={project.demoVideo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-link project-link-demo"
+                  >
+                    Demo
+                  </a>
+                )}
                 {project.demo && (
                   <a
                     href={project.demo}
