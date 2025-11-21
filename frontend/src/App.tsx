@@ -10,6 +10,7 @@ import SkillsPage from './pages/SkillsPage';
 import TimelinePage from './pages/TimelinePage';
 import ContactPage from './pages/ContactPage';
 import GlobePage from './pages/GlobePage';
+import IdeasPage from './pages/IdeasPage';
 import { PortfolioData } from './types';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
@@ -67,6 +68,7 @@ function App() {
               <Route path="/timeline" element={<TimelinePage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/globe" element={<GlobePage />} />
+              <Route path="/ideas" element={<IdeasPage />} />
             </Routes>
           </main>
         </div>

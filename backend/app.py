@@ -16,16 +16,16 @@ portfolio_data = {
     "github": "https://github.com/thisbeschojo",
     "linkedin": "https://linkedin.com/in/thisbeschojo",
     "projects": [
-        {
-            "id": 1,
-            "title": "Build a Bike with Tadej",
-            "description": "App where users build a bike with Tadej Pogacar. Built with a React frontend and Flask backend, using SQLAlchemy for ORM and SQLite for storage. Features OpenAI integration to simulate conversation with Tadej and an online shopping feature.",
-            "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy", "SQLite", "OpenAI"],
-            "github": "https://github.com/thisbeschojo/build-a-bike-with-tadej",
-            "demoVideo": None,
-            "image": "https://via.placeholder.com/400x300/667eea/ffffff?text=Build+a+Bike+with+Tadej",
-            "status": "Not yet started"
-        },
+        # {
+        #     "id": 1,
+        #     "title": "Build a Bike with Tadej",
+        #     "description": "App where users build a bike with Tadej Pogacar. Built with a React frontend and Flask backend, using SQLAlchemy for ORM and SQLite for storage. Features OpenAI integration to simulate conversation with Tadej and an online shopping feature.",
+        #     "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy", "SQLite", "OpenAI"],
+        #     "github": "https://github.com/thisbeschojo/build-a-bike-with-tadej",
+        #     "demoVideo": None,
+        #     "image": "https://via.placeholder.com/400x300/667eea/ffffff?text=Build+a+Bike+with+Tadej",
+        #     "status": "Not yet started"
+        # },
         {
             "id": 2,
             "title": "Chickens",

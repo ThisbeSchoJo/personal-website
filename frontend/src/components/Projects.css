@@ -22,9 +22,10 @@
   border-radius: var(--border-radius);
   padding: 0;
   transition: all 0.3s ease;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .project-card:hover {
@@ -41,6 +42,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  z-index: 1;
 }
 
 .project-image {
@@ -48,6 +52,7 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
+  display: block;
 }
 
 .project-card:hover .project-image {
@@ -58,13 +63,59 @@
   padding: 24px 32px;
 }
 
+.project-title-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-top: 24px;
+  flex-wrap: wrap;
+}
+
 .project-title {
   font-size: 1.5rem;
   color: var(--text-primary);
-  margin-bottom: 12px;
+  margin: 0;
   font-weight: 700;
   letter-spacing: -0.01em;
-  padding-top: 24px;
+}
+
+.project-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 2px 8px rgba(255, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  line-height: 1.2;
+  z-index: 100;
+}
+
+.project-badge-wip {
+  background: #ff0000;
+  color: #ffffff;
+  border-radius: 4px 0 4px 4px;
+  /* Flag tail effect - extra padding for the triangle */
+  padding-right: 20px;
+  top: 12px;
+  left: -20px;
+}
+
+/* Flag tail - triangular point extending to the right */
+.project-badge-wip::after {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid #ff0000;
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  filter: drop-shadow(2px 0 2px rgba(0, 0, 0, 0.2));
 }
 
 .project-description {

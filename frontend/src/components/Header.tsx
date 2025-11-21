@@ -12,7 +12,7 @@ const Header: React.FC<HeaderProps> = ({ name, title }) => {
   const location = useLocation();
   
   // Pages where hero section should be hidden
-  const pagesWithoutHero = ["/globe", "/contact", "/timeline", "/skills", "/projects", "/portfolio"];
+  const pagesWithoutHero = ["/globe", "/contact", "/timeline", "/skills", "/projects", "/portfolio", "/ideas"];
   const shouldShowHero = !pagesWithoutHero.includes(location.pathname);
 
   return (
@@ -76,6 +76,14 @@ const Header: React.FC<HeaderProps> = ({ name, title }) => {
             }`}
           >
             globe
+          </Link>
+          <Link
+            to="/ideas"
+            className={`nav-link ${
+              location.pathname === "/ideas" ? "active" : ""
+            }`}
+          >
+            ideas
           </Link>
           <ThemeToggle />
         </nav>

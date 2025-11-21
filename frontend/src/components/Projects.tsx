@@ -1,6 +1,6 @@
-import React from 'react';
-import './Projects.css';
-import { Project } from '../types';
+import React from "react";
+import "./Projects.css";
+import { Project } from "../types";
 
 interface ProjectsProps {
   projects: Project[];
@@ -12,27 +12,36 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
       <div className="section-content">
         <h2 className="section-title">Portfolio</h2>
         <p className="projects-intro">
-          I love planning events, making websites, and working on projects. Here you will find a collection of my work across internships, classes, personal projects, and extracurriculars.
+          I love planning events, making websites, and working on projects. Here
+          you will find a collection of my work across internships, classes,
+          personal projects, and extracurriculars.
         </p>
         <div className="projects-grid">
           {projects.map((project) => (
             <div key={project.id} className="project-card">
               {project.image && (
-                <div className="project-image-container">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="project-image"
-                  />
-                </div>
+                <>
+                  <div className="project-image-container">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="project-image"
+                    />
+                  </div>
+                  {project.status === "In Progress" && (
+                    <span className="project-badge project-badge-wip">WIP</span>
+                  )}
+                </>
               )}
-              <h3 className="project-title">{project.title}</h3>
+              <div className="project-title-container">
+                <h3 className="project-title">{project.title}</h3>
+              </div>
               <p className="project-description">
-                {project.description} Technologies used:{' '}
+                {project.description} Technologies used:{" "}
                 {project.technologies.map((tech, index) => (
                   <React.Fragment key={index}>
                     <strong>{tech}</strong>
-                    {index < project.technologies.length - 1 ? ', ' : '.'}
+                    {index < project.technologies.length - 1 ? ", " : "."}
                   </React.Fragment>
                 ))}
               </p>
@@ -75,4 +84,3 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
 };
 
 export default Projects;
-
