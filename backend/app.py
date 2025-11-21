@@ -112,26 +112,26 @@ portfolio_data = {
                 {
                     "id": "2025-graduated-flatiron",
                     "category": "Education",
-                    "title": "Graduated Flatiron School SWE certificate",
-                    "description": "Completed Full Stack Web Development program in Python with Flask and JavaScript.",
+                    "title": "Flatiron School",
+                    "description": "Completed intensive program in Python with Flask and JavaScript, focusing on full-stack development, RESTful APIs, and modern web technologies in New York, NY.",
                     "isNew": True,
                     "month": 5
                 },
                 {
                     "id": "2025-began-tech-elevate",
                     "category": "Work",
-                    "title": "Began Internship with TechElevate",
-                    "description": "Remote internship developing and maintaining TechElevate's website.",
+                    "title": "TechElevate",
+                    "description": "Remote internship developing and maintaining TechElevate's website. Creating websites for independent companies as part of fundraising initiatives for the organization.",
                     "isNew": True,
-                    "month": 5
+                    "month": 4
                 },
                 {
                     "id": "2025-began-freelance",
                     "category": "Work",
-                    "title": "Began Freelance work (Shark Stewards, Teaching While Queer)",
-                    "description": "Working with nonprofits to build and optimize WordPress sites.",
+                    "title": "Freelance Web Development",
+                    "description": "Remote freelance work building and optimizing WordPress sites for nonprofits including Teaching While Queer and Shark Stewards. Focusing on custom navigation, community features, accessibility, and performance optimization.",
                     "isNew": True,
-                    "month": 6
+                    "month": 4
                 }
             ]
         },
@@ -141,9 +141,26 @@ portfolio_data = {
                 {
                     "id": "2024-left-mkg",
                     "category": "Work",
-                    "title": "Left job at MKG",
-                    "description": "Completed role at Medical Knowledge Group.",
-                    "isNew": False
+                    "title": "Medical Knowledge Group",
+                    "description": "Completed role as Associate in Healthcare Consulting & Market Research in New York, NY. Led quantitative and qualitative research projects, managed vendor coordination and budget tracking, and delivered strategic market insights to healthcare industry clients.",
+                    "isNew": False,
+                    "month": 9
+                },
+                {
+                    "id": "2024-alaska-bushwhacking",
+                    "category": "Personal",
+                    "title": "Bushwhacking trip in Alaska",
+                    "description": "Embarked on an off-the-grid, all women bushwhacking adventure in Alaska, exploring remote wilderness areas and challenging terrain.",
+                    "isNew": False,
+                    "month": 8
+                },
+                {
+                    "id": "2024-portugal-cycling",
+                    "category": "Personal",
+                    "title": "Cycled the coast of Portugal",
+                    "description": "Completed a solo cycling journey down the coast of Portugal, from Porto to Lagos, averaging 50 miles per day for 10 days.",
+                    "isNew": False,
+                    "month": 7
                 }
             ]
         },
@@ -153,9 +170,31 @@ portfolio_data = {
                 {
                     "id": "2023-began-mkg",
                     "category": "Work",
-                    "title": "Began job at Medical Knowledge Group",
-                    "description": "Started as Associate - Healthcare Consulting & Market Research.",
-                    "isNew": False
+                    "title": "Medical Knowledge Group",
+                    "description": "Associate in Healthcare Consulting & Market Research in New York, NY. Managed research project plans, vendor coordination, and scheduling while delivering strategic insights to healthcare industry clients.",
+                    "isNew": False,
+                    "month": 1
+                },
+                {
+                    "id": "2023-completed-smg",
+                    "category": "Work",
+                    "title": "Science and Medicine Group",
+                    "description": "Completed remote role as Market Research Analyst. Researched and analyzed life science companies' financial data, market share, and developments. Produced global market reports, interviewed industry experts, and wrote articles on technologies and industry trends.",
+                    "isNew": False,
+                    "month": 4
+                }
+            ]
+        },
+        {
+            "year": 2022,
+            "entries": [
+                {
+                    "id": "2022-began-smg",
+                    "category": "Work",
+                    "title": "Science and Medicine Group",
+                    "description": "Remote role as Market Research Analyst analyzing life science companies' financial data, market share, segmentation, and developments. Forecasted future market growth, produced global market reports for laboratory instruments and lab automation, and interviewed industry experts.",
+                    "isNew": False,
+                    "month": 5
                 }
             ]
         },
@@ -165,9 +204,18 @@ portfolio_data = {
                 {
                     "id": "2021-graduated-georgetown",
                     "category": "Education",
-                    "title": "Graduated Georgetown with biotechnology masters",
-                    "description": "Completed degree in Biotechnology, Biosciences.",
-                    "isNew": False
+                    "title": "Georgetown University",
+                    "description": "Master of Science in Biotechnology and Biosciences, Washington, D.C.",
+                    "isNew": False,
+                    "month": 12
+                },
+                {
+                    "id": "2021-began-oxford-biodynamics",
+                    "category": "Work",
+                    "title": "Oxford BioDynamics",
+                    "description": "Remote internship as Market Research Analyst. Conducted competitive analysis and developed market access strategies for two oncological diseases of interest.",
+                    "isNew": False,
+                    "month": 8
                 }
             ]
         },
@@ -177,9 +225,31 @@ portfolio_data = {
                 {
                     "id": "2020-graduated-westminster",
                     "category": "Education",
-                    "title": "Graduated University of Westminster with psychology masters",
-                    "description": "Completed Psychology degree in London, England.",
-                    "isNew": False
+                    "title": "University of Westminster",
+                    "description": "Master of Science in Psychology, London, England.",
+                    "isNew": False,
+                    "month": 9
+                },
+                {
+                    "id": "2020-completed-researcher-missouri",
+                    "category": "Work",
+                    "title": "University of Missouri",
+                    "description": "Completed role as Researcher conducting neuroscience research into addiction, contributing to understanding of neural mechanisms underlying addictive behaviors.",
+                    "isNew": False,
+                    "month": 8
+                }
+            ]
+        },
+        {
+            "year": 2019,
+            "entries": [
+                {
+                    "id": "2019-researcher-missouri",
+                    "category": "Work",
+                    "title": "University of Missouri",
+                    "description": "Researcher conducting neuroscience research into addiction, contributing to understanding of neural mechanisms underlying addictive behaviors.",
+                    "isNew": False,
+                    "month": 1
                 }
             ]
         },
@@ -189,9 +259,10 @@ portfolio_data = {
                 {
                     "id": "2018-graduated-wake-forest",
                     "category": "Education",
-                    "title": "Graduated Wake Forest biology degree",
-                    "description": "Completed degree in Biology with minor in Chemistry.",
-                    "isNew": False
+                    "title": "Wake Forest University",
+                    "description": "Bachelor of Science in Biology with minor in Chemistry, Winston-Salem, NC.",
+                    "isNew": False,
+                    "month": 5
                 }
             ]
         }
