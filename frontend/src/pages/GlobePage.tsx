@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import GlobeComponent from '../components/Globe';
-import Footer from '../components/Footer';
 import { PortfolioData } from '../types';
 import './GlobePage.css';
 
@@ -34,16 +33,11 @@ const GlobePage: React.FC = () => {
     <>
       <section className="section globe-section">
         <div className="section-content">
-          <h2 className="section-title">Places I've Lived</h2>
-          <p className="globe-intro">
-            Explore the locations where I've lived and worked. Click on any pin to focus on that location.
-          </p>
           <div className="globe-wrapper">
             <GlobeComponent size="large" />
           </div>
         </div>
       </section>
-      <Footer name={portfolioData.name} />
     </>
   );
 };

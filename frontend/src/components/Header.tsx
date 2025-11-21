@@ -10,6 +10,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ name, title }) => {
   const location = useLocation();
+  const isGlobePage = location.pathname === "/globe";
 
   return (
     <header className="header">
@@ -76,9 +77,11 @@ const Header: React.FC<HeaderProps> = ({ name, title }) => {
           <ThemeToggle />
         </nav>
       </div>
-      <div className="hero-section">
-        <h1 className="hero-title">{title}</h1>
-      </div>
+      {!isGlobePage && (
+        <div className="hero-section">
+          <h1 className="hero-title">{title}</h1>
+        </div>
+      )}
     </header>
   );
 };

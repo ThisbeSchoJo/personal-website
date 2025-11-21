@@ -17,7 +17,6 @@ interface GlobeComponentProps {
 const GlobeComponent: React.FC<GlobeComponentProps> = ({ size = 'large' }) => {
   const globeEl = useRef<any>();
   const [isHovered, setIsHovered] = useState(false);
-  const [theme, setTheme] = useState<string>('light');
   const [dimensions, setDimensions] = useState({ width: 600, height: 600 });
 
   // Set dimensions based on size prop
@@ -26,48 +25,38 @@ const GlobeComponent: React.FC<GlobeComponentProps> = ({ size = 'large' }) => {
       if (size === 'small') {
         setDimensions({ width: 100, height: 100 });
       } else {
+        // Full viewport dimensions minus header (no hero-section on globe page)
         const isMobile = window.innerWidth < 768;
-        setDimensions({ 
-          width: isMobile ? 400 : 600, 
-          height: isMobile ? 400 : 600 
-        });
+        const headerHeight = isMobile ? 50 : 60;
+        const width = window.innerWidth;
+        const height = window.innerHeight - headerHeight;
+        setDimensions({ width, height });
       }
     };
 
     updateDimensions();
-    window.addEventListener('resize', updateDimensions);
-    return () => window.removeEventListener('resize', updateDimensions);
+    const handleResize = () => updateDimensions();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [size]);
 
-  // Listen for theme changes
-  useEffect(() => {
-    const updateTheme = () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-      setTheme(currentTheme);
-    };
 
-    updateTheme();
-    
-    // Watch for theme changes
-    const observer = new MutationObserver(updateTheme);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme']
-    });
+  // Bright red color for pins
+  const pinColor = '#ff0000';
 
-    return () => observer.disconnect();
-  }, []);
-
-  // Get theme-aware color
-  const pinColor = theme === 'dark' ? '#c98787' : '#f5c2c2';
-
-  // Locations where the user has lived
+  // Locations where the user has lived - bigger pins
   const locations: Location[] = useMemo(() => [
-    { lat: 36.9553, lng: -94.7875, label: 'Quapaw, OK', size: 0.12, color: pinColor }, // Quapaw, Oklahoma
-    { lat: 40.7128, lng: -74.0060, label: 'New York City, NY', size: 0.15, color: pinColor }, // New York City
-    { lat: 34.0522, lng: -118.2437, label: 'Los Angeles, CA', size: 0.12, color: pinColor }, // Los Angeles
-    { lat: 32.7157, lng: -117.1611, label: 'San Diego, CA', size: 0.12, color: pinColor }, // San Diego
-    { lat: 38.9072, lng: -77.0369, label: 'Washington, DC', size: 0.12, color: pinColor }, // Washington, DC
+    { lat: 36.9553, lng: -94.7875, label: 'Quapaw, OK', size: 0.3, color: pinColor }, // Quapaw, Oklahoma
+    { lat: 40.7128, lng: -74.0060, label: 'New York City, NY', size: 0.35, color: pinColor }, // New York City
+    { lat: 34.0522, lng: -118.2437, label: 'Los Angeles, CA', size: 0.3, color: pinColor }, // Los Angeles
+    { lat: 32.7157, lng: -117.1611, label: 'San Diego, CA', size: 0.3, color: pinColor }, // San Diego
+    { lat: 38.9072, lng: -77.0369, label: 'Washington, DC', size: 0.3, color: pinColor }, // Washington, DC
+    { lat: 39.7392, lng: -104.9903, label: 'Denver, CO', size: 0.3, color: pinColor }, // Denver, Colorado
+    { lat: 51.5074, lng: -0.1278, label: 'London, England', size: 0.3, color: pinColor }, // London, England
+    { lat: 36.3729, lng: -94.2088, label: 'Bentonville, AR', size: 0.3, color: pinColor }, // Bentonville, Arkansas
+    { lat: 32.7767, lng: -96.7970, label: 'Dallas, TX', size: 0.3, color: pinColor }, // Dallas, Texas
+    { lat: 38.9517, lng: -92.3341, label: 'Columbia, MO', size: 0.3, color: pinColor }, // Columbia, Missouri
+    { lat: 36.0999, lng: -80.2442, label: 'Winston-Salem, NC', size: 0.3, color: pinColor }, // Winston-Salem, North Carolina
   ], [pinColor]);
 
   useEffect(() => {
@@ -110,8 +99,8 @@ const GlobeComponent: React.FC<GlobeComponentProps> = ({ size = 'large' }) => {
         pointLabel="label"
         pointRadius="size"
         pointColor="color"
-        pointResolution={8}
-        pointAltitude={0.01}
+        pointResolution={12}
+        pointAltitude={0.02}
         enablePointerInteraction={true}
         onPointHover={(point: any) => {
           if (point) {
