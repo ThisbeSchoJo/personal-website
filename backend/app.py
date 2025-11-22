@@ -1,6 +1,10 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
+import requests
+import feedparser
+from datetime import datetime
+import re
 
 app = Flask(__name__)
 CORS(app)
@@ -278,6 +282,175 @@ def get_portfolio():
 def health_check():
     """Health check endpoint"""
     return jsonify({"status": "healthy"})
+
+@app.route('/api/goodreads', methods=['GET'])
+def get_goodreads_books():
+    """Fetch books from Goodreads RSS feed"""
+    user_id = request.args.get('user_id')
+    
+    if not user_id:
+        return jsonify({"error": "user_id parameter is required"}), 400
+    
+    # Goodreads RSS feed URL
+    rss_url = f"https://www.goodreads.com/review/list_rss/{user_id}?shelf=read"
+    
+    try:
+        # Fetch the RSS feed with proper headers to avoid 403 errors
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'application/rss+xml, application/xml, text/xml, */*',
+            'Accept-Language': 'en-US,en;q=0.9',
+        }
+        response = requests.get(rss_url, headers=headers, timeout=10)
+        response.raise_for_status()
+        
+        # Parse the RSS feed
+        feed = feedparser.parse(response.content)
+        
+        # Check if feed is valid
+        if feed.bozo and feed.bozo_exception:
+            error_msg = str(feed.bozo_exception)
+            # Check if it's a common error
+            if '404' in error_msg or 'not found' in error_msg.lower():
+                return jsonify({"error": "Goodreads user not found. Please check your user ID."}), 404
+            return jsonify({"error": "Failed to parse RSS feed", "details": error_msg}), 500
+        
+        # Check if feed has entries
+        if not hasattr(feed, 'entries') or len(feed.entries) == 0:
+            return jsonify({"error": "No books found. Make sure your 'read' shelf is public and has books."}), 404
+        
+        books = []
+        
+        for entry in feed.entries:
+            # Extract book information
+            # First try to get title and author from dedicated fields
+            title = None
+            author = 'Unknown Author'
+            
+            # Check for title field
+            if hasattr(entry, 'title') and entry.title:
+                title_full = entry.title
+                # Remove CDATA if present
+                if '<![CDATA[' in title_full:
+                    title_full = re.sub(r'<!\[CDATA\[(.*?)\]\]>', r'\1', title_full)
+                title = title_full.split(' by ')[0].strip()
+                
+                # Try to extract author from title
+                if ' by ' in title_full:
+                    parts = title_full.split(' by ', 1)
+                    if len(parts) > 1:
+                        title = parts[0].strip()
+                        author = parts[1].strip()
+            
+            # Prefer author_name field if available
+            if hasattr(entry, 'author_name') and entry.author_name:
+                author = entry.author_name
+            elif hasattr(entry, 'author') and entry.author:
+                author = entry.author
+            
+            # Extract book link
+            link = entry.get('link', '') or entry.get('id', '')
+            
+            # Extract book ID - prefer book_id field from RSS
+            book_id = None
+            if hasattr(entry, 'book_id') and entry.book_id:
+                book_id = str(entry.book_id)
+            elif link:
+                # Fallback: extract from link
+                book_id_match = re.search(r'/book/show/(\d+)', link)
+                if book_id_match:
+                    book_id = book_id_match.group(1)
+                else:
+                    # Try to extract from id/guid field
+                    id_match = re.search(r'(\d+)', entry.get('id', '') or entry.get('guid', ''))
+                    if id_match:
+                        book_id = id_match.group(1)
+            
+            # Extract cover image
+            cover_image = None
+            # Try multiple methods to get cover image
+            if hasattr(entry, 'content') and entry.content:
+                # Try to find image in content
+                img_matches = re.findall(r'<img[^>]+src="([^"]+)"', str(entry.content))
+                if img_matches:
+                    # Look for book cover images specifically
+                    for img_url in img_matches:
+                        if 'book' in img_url.lower() or 'cover' in img_url.lower() or 'goodreads' in img_url.lower():
+                            cover_image = img_url
+                            break
+                    if not cover_image and img_matches:
+                        cover_image = img_matches[0]
+            
+            # Also check for book image URLs (prefer larger images)
+            if not cover_image:
+                for attr in ['book_large_image_url', 'book_medium_image_url', 'book_image_url', 'book_small_image_url']:
+                    if hasattr(entry, attr):
+                        img_url = getattr(entry, attr)
+                        if img_url:
+                            cover_image = img_url
+                            break
+            
+            # Extract user's rating (not average rating)
+            rating = None
+            # Only use user_rating, skip if 0 or invalid
+            if hasattr(entry, 'user_rating'):
+                try:
+                    rating_val = entry.user_rating
+                    if isinstance(rating_val, str):
+                        rating_val = rating_val.strip()
+                    rating_int = int(float(rating_val)) if rating_val else 0
+                    # Only set rating if it's between 1-5 (skip 0)
+                    if 1 <= rating_int <= 5:
+                        rating = rating_int
+                except (ValueError, TypeError):
+                    pass
+            
+            # Extract date read
+            date_read = None
+            for attr in ['user_read_at', 'user_date_added', 'published']:
+                if hasattr(entry, attr) and getattr(entry, attr):
+                    try:
+                        date_read = str(getattr(entry, attr))
+                        break
+                    except:
+                        pass
+            
+            # Extract description/summary
+            description = None
+            for attr in ['description', 'summary', 'content']:
+                if hasattr(entry, attr) and getattr(entry, attr):
+                    desc_text = str(getattr(entry, attr))
+                    # Clean up HTML
+                    desc_text = re.sub(r'<[^>]+>', '', desc_text)
+                    desc_text = desc_text.strip()
+                    if desc_text and len(desc_text) > 20:  # Only use if substantial
+                        description = desc_text[:500]
+                        break
+            
+            # Only add if we have at least a title
+            if title and title.strip() and title != 'Unknown':
+                books.append({
+                    "id": book_id or f"book_{len(books)}",
+                    "title": title.strip(),
+                    "author": author.strip() if author else 'Unknown Author',
+                    "link": link,
+                    "cover_image": cover_image,
+                    "rating": rating,
+                    "date_read": date_read,
+                    "description": description
+                })
+        
+        return jsonify({
+            "books": books,
+            "total": len(books),
+            "feed_title": feed.feed.get('title', ''),
+            "feed_link": feed.feed.get('link', '')
+        })
+        
+    except requests.RequestException as e:
+        return jsonify({"error": "Failed to fetch Goodreads data", "details": str(e)}), 500
+    except Exception as e:
+        return jsonify({"error": "An error occurred", "details": str(e)}), 500
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5001))

@@ -21,15 +21,18 @@ const IdeasPage: React.FC = () => {
     if (savedIdeas) {
       try {
         const parsed = JSON.parse(savedIdeas);
-        // Initialize with random positions and velocities
-        const initialized = parsed.map((idea: Omit<Idea, 'vx' | 'vy'>, index: number) => ({
-          ...idea,
-          x: idea.x || Math.random() * 80 + 10,
-          y: idea.y || Math.random() * 60 + 10,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-        }));
-        setIdeas(initialized);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          // Initialize with random positions and velocities if missing
+          const initialized = parsed.map((idea: any) => ({
+            id: idea.id || Date.now() + Math.random(),
+            text: idea.text || '',
+            x: typeof idea.x === 'number' ? idea.x : Math.random() * 80 + 10,
+            y: typeof idea.y === 'number' ? idea.y : Math.random() * 60 + 10,
+            vx: typeof idea.vx === 'number' ? idea.vx : (Math.random() - 0.5) * 0.5,
+            vy: typeof idea.vy === 'number' ? idea.vy : (Math.random() - 0.5) * 0.5,
+          }));
+          setIdeas(initialized);
+        }
       } catch (e) {
         console.error('Error loading ideas:', e);
       }
@@ -38,9 +41,7 @@ const IdeasPage: React.FC = () => {
 
   // Save ideas to localStorage whenever they change
   useEffect(() => {
-    if (ideas.length > 0) {
-      localStorage.setItem('ideas', JSON.stringify(ideas));
-    }
+    localStorage.setItem('ideas', JSON.stringify(ideas));
   }, [ideas]);
 
   // Animation loop for moving ideas
@@ -130,7 +131,7 @@ const IdeasPage: React.FC = () => {
             onChange={handleChange}
             onKeyDown={handleKeyDown}
             placeholder="Write your ideas here... (Cmd/Ctrl + Enter to submit)"
-            rows={8}
+            rows={4}
           />
           <button type="submit" className="ideas-submit-btn">
             Add Idea
