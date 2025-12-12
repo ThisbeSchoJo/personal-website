@@ -41,11 +41,13 @@ const GlobeComponent: React.FC<GlobeComponentProps> = ({ size = 'large' }) => {
   }, [size]);
 
 
-  // Bright red color for pins
+  // Bright red color for pins (places lived)
   const pinColor = '#ff0000';
+  // Cyan blue color for visited places
+  const visitedColor = '#00CED1';
 
-  // Locations where the user has lived - bigger pins
-  const locations: Location[] = useMemo(() => [
+  // Locations where the user has lived - bigger red pins
+  const livedLocations: Location[] = useMemo(() => [
     { lat: 36.9553, lng: -94.7875, label: 'Quapaw, OK', size: 0.3, color: pinColor }, // Quapaw, Oklahoma
     { lat: 40.7128, lng: -74.0060, label: 'New York City, NY', size: 0.35, color: pinColor }, // New York City
     { lat: 34.0522, lng: -118.2437, label: 'Los Angeles, CA', size: 0.3, color: pinColor }, // Los Angeles
@@ -58,6 +60,32 @@ const GlobeComponent: React.FC<GlobeComponentProps> = ({ size = 'large' }) => {
     { lat: 38.9517, lng: -92.3341, label: 'Columbia, MO', size: 0.3, color: pinColor }, // Columbia, Missouri
     { lat: 36.0999, lng: -80.2442, label: 'Winston-Salem, NC', size: 0.3, color: pinColor }, // Winston-Salem, North Carolina
   ], [pinColor]);
+
+  // Locations visited - cyan dots (same size as red dots)
+  const visitedLocations: Location[] = useMemo(() => [
+    { lat: 52.5200, lng: 13.4050, label: 'Berlin, Germany', size: 0.3, color: visitedColor },
+    { lat: 31.6295, lng: -7.9811, label: 'Marrakesh, Morocco', size: 0.3, color: visitedColor },
+    { lat: 52.3676, lng: 4.9041, label: 'Amsterdam, Netherlands', size: 0.3, color: visitedColor },
+    { lat: 52.0907, lng: 5.1214, label: 'Utrecht, Netherlands', size: 0.3, color: visitedColor },
+    { lat: 54.5973, lng: -5.9301, label: 'Northern Ireland', size: 0.3, color: visitedColor }, // Belfast
+    { lat: 56.4907, lng: -4.2026, label: 'Scotland', size: 0.3, color: visitedColor }, // Central Scotland
+    { lat: 50.5039, lng: 4.4699, label: 'Belgium', size: 0.3, color: visitedColor }, // Brussels
+    { lat: 41.9028, lng: 12.4964, label: 'Italy', size: 0.3, color: visitedColor }, // Rome
+    { lat: 40.4168, lng: -3.7038, label: 'Spain', size: 0.3, color: visitedColor }, // Madrid
+    { lat: 38.7223, lng: -9.1393, label: 'Portugal', size: 0.3, color: visitedColor }, // Lisbon
+    { lat: 48.2082, lng: 16.3738, label: 'Austria', size: 0.3, color: visitedColor }, // Vienna
+    { lat: 18.1096, lng: -77.2975, label: 'Jamaica', size: 0.3, color: visitedColor }, // Kingston
+    { lat: 27.8406, lng: -114.1314, label: 'Baja California, Mexico', size: 0.3, color: visitedColor }, // Central Baja
+    { lat: 22.8905, lng: -109.9167, label: 'Cabo, Mexico', size: 0.3, color: visitedColor }, // Cabo San Lucas
+    { lat: 18.4861, lng: -69.9312, label: 'Dominican Republic', size: 0.3, color: visitedColor }, // Santo Domingo
+    { lat: 9.7489, lng: -83.7534, label: 'Costa Rica', size: 0.3, color: visitedColor }, // San Jose
+    { lat: 14.5586, lng: -90.7333, label: 'Antigua, Guatemala', size: 0.3, color: visitedColor },
+    { lat: 12.1364, lng: -86.2514, label: 'Nicaragua', size: 0.3, color: visitedColor }, // Managua
+    { lat: 62.3239, lng: -150.1097, label: 'Talkeetna, Alaska', size: 0.3, color: visitedColor },
+  ], [visitedColor]);
+
+  // Combine all locations
+  const locations = useMemo(() => [...livedLocations, ...visitedLocations], [livedLocations, visitedLocations]);
 
   useEffect(() => {
     if (!globeEl.current) return;

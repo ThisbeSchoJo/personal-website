@@ -18,7 +18,7 @@ portfolio_data = {
     "phone": "417-389-4611",
     "location": "Brooklyn, New York",
     "github": "https://github.com/thisbeschojo",
-    "linkedin": "https://linkedin.com/in/thisbeschojo",
+    "linkedin": "https://www.linkedin.com/in/thisbe/",
     "goodreads_user_id": "48019961",
     "projects": [
         # {

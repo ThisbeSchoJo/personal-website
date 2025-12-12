@@ -35,6 +35,16 @@ const GlobePage: React.FC = () => {
         <div className="section-content">
           <div className="globe-wrapper">
             <GlobeComponent size="large" />
+            <div className="globe-legend">
+              <div className="legend-item">
+                <span className="legend-dot legend-dot-red"></span>
+                <span className="legend-label">Places lived</span>
+              </div>
+              <div className="legend-item">
+                <span className="legend-dot legend-dot-cyan"></span>
+                <span className="legend-label">Places visited</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
