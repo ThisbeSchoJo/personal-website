@@ -114,6 +114,22 @@ portfolio_data = {
             "year": 2025,
             "entries": [
                 {
+                    "id": "sailing-baja-california",
+                    "category": "Personal",
+                    "title": "Sailing Baja California",
+                    "description": "Completed an 8-day off-the-grid, all women sailing course in Baja California, Mexico with NOLS.",
+                    "isNew": True,
+                    "month": 11
+                },
+                {
+                    "id": "2025-began-locusai",
+                    "category": "Work",
+                    "title": "LocusAI GmbH",
+                    "description": "Junior Software Engineer building and maintaining full-stack systems, including backend services, APIs, and AI-powered automation workflows. Integrated third-party systems and cloud infrastructure, ensuring security, data protection, and compliance while contributing to system architecture and performance.",
+                    "isNew": True,
+                    "month": 12
+                },
+                {
                     "id": "2025-graduated-flatiron",
                     "category": "Education",
                     "title": "Flatiron School",
@@ -127,7 +143,7 @@ portfolio_data = {
                     "title": "TechElevate",
                     "description": "Remote internship developing and maintaining TechElevate's website. Creating websites for independent companies as part of fundraising initiatives for the organization.",
                     "isNew": True,
-                    "month": 4
+                    "month": 6
                 },
                 {
                     "id": "2025-began-freelance",
@@ -135,7 +151,7 @@ portfolio_data = {
                     "title": "Freelance Web Development",
                     "description": "Remote freelance work building and optimizing WordPress sites for nonprofits including Teaching While Queer and Shark Stewards. Focusing on custom navigation, community features, accessibility, and performance optimization.",
                     "isNew": True,
-                    "month": 4
+                    "month": 6
                 }
             ]
         },

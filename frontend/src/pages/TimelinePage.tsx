@@ -82,23 +82,13 @@ const TimelinePage: React.FC = () => {
     const monthPosition = month ? (month - 1) / 12 : 0.5; // Default to mid-year (month 6)
 
     // Calculate base position for the year
-    // Give 2025 (last year) more vertical space - allocate 50% more space to it
+    // All years get equal spacing
     const totalYears = yearRange.end - yearRange.start + 1;
     const yearIndex = year - yearRange.start;
-
-    let yearStart, yearEnd;
-    if (year === yearRange.end) {
-      // Last year (2025) gets 50% more space for multiple events
-      // Allocate space: other years get normal space, last year gets 1.5x
-      const normalYearPercent = 100 / (totalYears - 1 + 1.5);
-      yearStart = (totalYears - 1) * normalYearPercent;
-      yearEnd = 100;
-    } else {
-      // Other years share space evenly
-      const normalYearPercent = 100 / (totalYears - 1 + 1.5);
-      yearStart = yearIndex * normalYearPercent;
-      yearEnd = (yearIndex + 1) * normalYearPercent;
-    }
+    const yearPercent = 100 / totalYears;
+    
+    const yearStart = yearIndex * yearPercent;
+    const yearEnd = (yearIndex + 1) * yearPercent;
 
     const yearRangePercent = yearEnd - yearStart;
 
@@ -171,8 +161,8 @@ const TimelinePage: React.FC = () => {
                     // Calculate position for other years, reversing so 2018 is at bottom
                     const totalYears = yearRange.end - yearRange.start;
                     const yearIndex = year - yearRange.start;
-                    const normalYearPercent = 100 / (totalYears - 1 + 1.5);
-                    yearStartPosition = yearIndex * normalYearPercent;
+                    const yearPercent = 100 / totalYears;
+                    yearStartPosition = yearIndex * yearPercent;
                     // Invert position: 100% becomes 0%, 0% becomes 100%
                     yearStartPosition = 100 - yearStartPosition;
                   }
@@ -188,6 +178,39 @@ const TimelinePage: React.FC = () => {
                     return 0;
                   });
 
+                  // Calculate the year's range on the timeline
+                  let yearStart: number, yearEnd: number;
+                  if (year === yearRange.end) {
+                    // Last year (2026) - shouldn't have events, but handle it anyway
+                    yearStart = 0;
+                    yearEnd = 0;
+                  } else {
+                    const totalYears = yearRange.end - yearRange.start;
+                    const yearPercent = 100 / totalYears;
+                    yearStart = (year - yearRange.start) * yearPercent;
+                    yearEnd = (year - yearRange.start + 1) * yearPercent;
+
+                    // Invert positions: 100% becomes 0%, 0% becomes 100%
+                    const invertedYearStart = 100 - yearEnd;
+                    const invertedYearEnd = 100 - yearStart;
+                    yearStart = invertedYearStart;
+                    yearEnd = invertedYearEnd;
+                  }
+
+                  const yearRangePercent = yearEnd - yearStart;
+
+                  // Stack all events starting below the year marker, with even spacing
+                  // Higher month values (more recent) appear first, descending order
+                  const numEvents = sortedYearEvents.length;
+                  // Start entries below the year marker (offset of ~8% of year range)
+                  const startOffset = 0.08;
+                  // Spacing between entries (reduced)
+                  const spacing = numEvents > 1 ? Math.min(0.17, 0.9 / numEvents) : 0;
+                  const adjustedPositions: number[] = sortedYearEvents.map((_, index) => {
+                    // Start below year marker and stack downward
+                    return startOffset + index * spacing;
+                  });
+
                   return (
                     <div key={year}>
                       <div
@@ -201,53 +224,16 @@ const TimelinePage: React.FC = () => {
                       </div>
                       {sortedYearEvents.map((event, eventIndex) => {
                         const isExpanded = expandedEntries.has(event.id);
-
-                        // Calculate the year's range on the timeline
-                        let yearStart, yearEnd;
-                        if (event.year === yearRange.end) {
-                          // Last year (2026) - shouldn't have events, but handle it anyway
-                          yearStart = 0;
-                          yearEnd = 0;
-                        } else {
-                          const totalYears = yearRange.end - yearRange.start;
-                          const normalYearPercent =
-                            100 / (totalYears - 1 + 1.5);
-                          yearStart =
-                            (event.year - yearRange.start) * normalYearPercent;
-                          yearEnd =
-                            (event.year - yearRange.start + 1) *
-                            normalYearPercent;
-
-                          // Invert positions: 100% becomes 0%, 0% becomes 100%
-                          // Need to swap yearStart and yearEnd when inverting
-                          const invertedYearStart = 100 - yearEnd;
-                          const invertedYearEnd = 100 - yearStart;
-                          yearStart = invertedYearStart;
-                          yearEnd = invertedYearEnd;
-                        }
-
-                        const yearRangePercent = yearEnd - yearStart;
-
-                        // Calculate position: evenly space events within the year
-                        // Divide the year by number of events, place each in the middle of its segment
-                        // Since timeline is inverted, reverse eventIndex so newest events are at top
-                        const numEvents = sortedYearEvents.length;
-                        const reversedIndex = numEvents - 1 - eventIndex;
-                        // Position at (i + 0.5) / N - this places events evenly spaced
-                        // For 1 event: 0.5 (middle)
-                        // For 2 events: 0.25, 0.75
-                        // For 3 events: 0.167, 0.5, 0.833
-                        const positionWithinYear =
-                          (reversedIndex + 0.5) / numEvents;
+                        const positionWithinYear = adjustedPositions[eventIndex];
                         const eventPosition =
                           yearStart + positionWithinYear * yearRangePercent;
 
                         return (
                           <div
                             key={event.id}
-                            className={`timeline-event-on-scale ${
-                              !event.isNew ? "greyed-out" : ""
-                            } ${isExpanded ? "expanded" : ""}`}
+                            className={`timeline-event-on-scale greyed-out ${
+                              isExpanded ? "expanded" : ""
+                            }`}
                             style={{
                               top: `${eventPosition}%`,
                             }}

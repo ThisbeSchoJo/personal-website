@@ -27,14 +27,14 @@
   max-width: 1000px;
   margin: 0 auto;
   position: relative;
-  min-height: 2400px;
+  min-height: 4000px;
   overflow-x: visible;
 }
 
 .timeline-scale {
   position: relative;
   width: 100%;
-  min-height: 2400px;
+  min-height: 4000px;
 }
 
 .timeline-vertical-line {
