@@ -41,8 +41,8 @@ export interface PortfolioData {
   location?: string;
   github: string;
   linkedin: string;
+  goodreads_user_id?: string;
   projects: Project[];
   skills: Skills;
   timeline?: TimelineItem[];
 }
-

@@ -19,6 +19,7 @@ portfolio_data = {
     "location": "Brooklyn, New York",
     "github": "https://github.com/thisbeschojo",
     "linkedin": "https://linkedin.com/in/thisbeschojo",
+    "goodreads_user_id": "48019961",
     "projects": [
         # {
         #     "id": 1,
