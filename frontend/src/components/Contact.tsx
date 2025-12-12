@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaEnvelope, FaGithub, FaLinkedin, FaSpotify, FaWordpress } from 'react-icons/fa';
+import { FaEnvelope, FaGithub, FaLinkedin, FaSpotify, FaMedium } from 'react-icons/fa';
 import './Contact.css';
 
 interface ContactProps {
@@ -40,16 +40,16 @@ const Contact: React.FC<ContactProps> = ({ email, github, linkedin }) => {
             LinkedIn
           </a>
           <a
-            href="https://wordpress.com"
+            href="https://medium.com/@thisbeschojo"
             target="_blank"
             rel="noopener noreferrer"
             className="contact-link"
           >
-            <FaWordpress className="contact-icon" />
+            <FaMedium className="contact-icon" />
             Blog
           </a>
           <a
-            href="https://spotify.com"
+            href="https://open.spotify.com/user/thisbeschojo"
             target="_blank"
             rel="noopener noreferrer"
             className="contact-link"
