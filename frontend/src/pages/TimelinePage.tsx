@@ -194,7 +194,7 @@ const TimelinePage: React.FC = () => {
                   );
 
                   return (
-                    <div key={year}>
+                    <div key={year} className="timeline-year-group">
                       <div
                         className="timeline-year-marker"
                         style={{

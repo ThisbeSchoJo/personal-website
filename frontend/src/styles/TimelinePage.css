@@ -281,48 +281,100 @@
   .timeline-wrapper {
     min-height: auto;
     overflow-x: visible;
+    padding: 0 16px;
   }
 
   .timeline-scale {
     min-height: auto;
+    position: relative;
+    display: block;
   }
 
+  /* Hide the vertical line on mobile; we use a flow layout instead */
   .timeline-vertical-line {
-    left: 50px;
+    display: none;
+  }
+
+  /* Each year becomes a stacked block with space below */
+  .timeline-year-group {
+    position: static;
+    display: block;
+    margin-bottom: 40px;
+    padding-left: 0;
+  }
+
+  .timeline-year-group:last-of-type {
+    margin-bottom: 24px;
+  }
+
+  /* Year marker: static, no absolute positioning */
+  .timeline-year-marker {
+    position: static;
+    transform: none;
+    margin-bottom: 16px;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   .timeline-year-tick {
-    margin-left: 46px;
+    margin-left: 0;
+    width: 10px;
+    height: 2px;
+    flex-shrink: 0;
   }
 
+  .timeline-year-label {
+    font-size: 1rem;
+  }
+
+  /* Events: stack below the year, no absolute positioning */
   .timeline-event-on-scale {
-    left: 100px;
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    align-items: stretch;
+    gap: 0;
+    margin-top: 12px;
+    margin-left: 0;
+    width: 100%;
   }
 
-  .timeline-event-popup {
-    max-width: calc(100vw - 140px);
+  .timeline-event-on-scale .timeline-event-popup {
+    max-width: none;
   }
 
   .timeline-entry {
-    padding: 14px 18px;
+    padding: 14px 16px;
+    max-width: none;
   }
 
   .timeline-entry-title {
     font-size: 0.95rem;
   }
 
+  /* Connector line hidden on mobile (details show below) */
   .timeline-connector-line {
-    width: 20px;
+    display: none;
   }
 
+  /* Details: show below the entry in flow, full width */
   .timeline-entry-details {
-    left: calc(100% + 20px);
-    min-width: 250px;
-    max-width: calc(100vw - 200px);
-    padding: 14px 18px;
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+    margin-top: 12px;
+    margin-left: 0;
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+    padding: 14px 16px;
+    box-sizing: border-box;
   }
 
   .timeline-entry-description {
