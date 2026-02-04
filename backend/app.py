@@ -38,7 +38,7 @@ portfolio_data = {
             "technologies": ["React", "JavaScript", "Flask", "Python"],
             "github": "https://github.com/thisbeschojo/chickens",
             "demoVideo": None,
-            "image": "fallback-screenshot.png",
+            "image": "/images/portfolio/fallback-screenshot.png",
             "status": "In Progress"
         },
         {
@@ -48,7 +48,7 @@ portfolio_data = {
             "technologies": ["TypeScript", "Node.js", "USDA FoodData API"],
             "github": "https://github.com/thisbeschojo/happy-food",
             "demoVideo": "https://youtu.be/D6VTj3kSKYY?si=xcKVSUdVhTHOF3O2",
-            "image": "fallback-screenshot.png"
+            "image": "/images/portfolio/happyfood-screenshot.png"
         },
         {
             "id": 4,

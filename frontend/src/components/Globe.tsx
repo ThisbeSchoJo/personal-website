@@ -231,6 +231,13 @@ const GlobeComponent: React.FC<GlobeComponentProps> = ({ size = "large" }) => {
         color: visitedColor,
       }, // Cabo San Lucas
       {
+        lat: 19.4326,
+        lng: -99.1332,
+        label: "Mexico City, Mexico",
+        size: 0.3,
+        color: visitedColor,
+      },
+      {
         lat: 18.4861,
         lng: -69.9312,
         label: "Dominican Republic",
@@ -262,6 +269,27 @@ const GlobeComponent: React.FC<GlobeComponentProps> = ({ size = "large" }) => {
         lat: 62.3239,
         lng: -150.1097,
         label: "Talkeetna, Alaska",
+        size: 0.3,
+        color: visitedColor,
+      },
+      {
+        lat: 35.6762,
+        lng: 139.6503,
+        label: "Tokyo, Japan",
+        size: 0.3,
+        color: visitedColor,
+      },
+      {
+        lat: 43.0618,
+        lng: 141.3545,
+        label: "Hokkaido, Japan",
+        size: 0.3,
+        color: visitedColor,
+      },
+      {
+        lat: 34.3853,
+        lng: 132.4553,
+        label: "Hiroshima, Japan",
         size: 0.3,
         color: visitedColor,
       },

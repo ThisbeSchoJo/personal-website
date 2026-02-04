@@ -157,34 +157,103 @@ The portfolio grid uses `loading="lazy"` and `decoding="async"` so images load o
 
 ## Deployment
 
-### Backend Deployment
+### Deploying the backend on Render (first)
 
-The Flask app can be deployed to platforms like:
+Deploy the Flask API so you have a public URL for the frontend. The repo already includes `gunicorn` in `backend/requirements.txt` for production.
+
+#### 1. Push your code to GitHub
+
+Make sure this repo is on GitHub (or GitLab). Render will connect to it.
+
+#### 2. Create a Render account and connect the repo
+
+1. Go to [render.com](https://render.com) and sign up (or log in with GitHub).
+2. In the dashboard, click **New +** → **Web Service**.
+3. Connect your repository:
+   - If you haven’t already, click **Connect account** for GitHub (or GitLab) and authorize Render.
+   - Select the repo that contains this project (e.g. `personal-website`).
+   - Click **Connect**.
+
+#### 3. Configure the Web Service
+
+Use these settings (adjust the name if you like):
+
+| Setting            | Value                                         |
+| ------------------ | --------------------------------------------- |
+| **Name**           | `personal-website-api` (or any name you like) |
+| **Region**         | Choose one close to you (e.g. Oregon)         |
+| **Branch**         | `main` (or your default branch)               |
+| **Root Directory** | `backend`                                     |
+| **Runtime**        | `Python 3`                                    |
+| **Build Command**  | `pip install -r requirements.txt`             |
+| **Start Command**  | `gunicorn --bind 0.0.0.0:$PORT app:app`       |
+
+- **Root Directory** must be `backend` so Render runs commands and finds `app.py` inside that folder.
+- **Start Command**: Render sets `PORT`; `gunicorn` listens on that port so the service is reachable.
+
+#### 4. (Optional) Environment variables
+
+You don’t need any env vars for the basic portfolio/API. If you add features that need secrets (e.g. API keys), add them under **Environment** in the Render dashboard.
+
+#### 5. Deploy
+
+1. Click **Create Web Service**.
+2. Render will clone the repo, run the build command, then start gunicorn. The first deploy can take a few minutes.
+3. When it’s live, Render shows a URL at the top, e.g. `https://personal-website-api.onrender.com`. Open it and add `/api/portfolio` or `/api/health` to confirm the API responds.
+
+#### 6. Save the API URL for the frontend
+
+Use this as the base API URL (no trailing slash):
+
+`https://<your-service-name>.onrender.com/api`
+
+Example: `https://personal-website-api.onrender.com/api`
+
+You’ll set this as `REACT_APP_API_URL` when you deploy the frontend (e.g. on Vercel).
+
+**Free tier note:** On the free plan, the service may spin down after ~15 minutes of no traffic. The first request after that can be slow (cold start). For a portfolio this is usually fine.
+
+---
+
+### Deploying on Vercel (frontend)
+
+Vercel hosts the **frontend** only. Use the backend URL from the step above (e.g. `https://your-app.onrender.com/api`) as `REACT_APP_API_URL`.
+
+#### 2. Push your code to GitHub
+
+Ensure this repo is on GitHub (or GitLab/Bitbucket); Vercel will import from there.
+
+#### 3. Create the project on Vercel
+
+1. Go to [vercel.com](https://vercel.com) and sign in (e.g. with GitHub).
+2. Click **Add New…** → **Project**.
+3. **Import** your repository (e.g. `your-username/personal-website`).
+4. Before deploying, set:
+   - **Root Directory**: click **Edit**, choose `frontend`, then **Continue**. (This tells Vercel to build the React app, not the repo root.)
+   - **Framework Preset**: should auto-detect **Create React App**.
+   - **Build Command**: `npm run build` (default).
+   - **Output Directory**: `build` (default).
+5. **Environment Variables**: add one:
+   - **Name**: `REACT_APP_API_URL`
+   - **Value**: your backend API base URL, e.g. `https://your-app.onrender.com/api`  
+     (No trailing slash. This is used for portfolio, books, timeline, etc.)
+6. Click **Deploy**. Vercel will build and give you a URL (e.g. `https://personal-website-xxx.vercel.app`).
+
+#### 4. After deployment
+
+- **Custom domain**: In the Vercel project, go to **Settings → Domains** and add your domain.
+- **Backend CORS**: Your Flask app already uses `flask-cors`. If your frontend domain changes, you may need to restrict `CORS(app, origins=["https://your-vercel-app.vercel.app"])` in `backend/app.py` for production, or leave it open for development.
+
+### Backend deployment (other options)
+
+The Flask app can also be deployed to:
 
 - Heroku
 - PythonAnywhere
 - AWS Elastic Beanstalk
 - DigitalOcean
 
-Make sure to set the `PORT` environment variable appropriately.
-
-### Frontend Deployment
-
-Build the production version:
-
-```bash
-cd frontend
-npm run build
-```
-
-The `build` folder can be deployed to:
-
-- Netlify
-- Vercel
-- GitHub Pages
-- AWS S3
-
-Don't forget to update the `REACT_APP_API_URL` environment variable to point to your deployed backend API.
+Set the `PORT` environment variable as required by the platform.
 
 ## License
 
