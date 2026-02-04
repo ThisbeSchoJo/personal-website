@@ -10,8 +10,8 @@
   margin: 0 auto;
 }
 
-.section-title {
-  font-size: 3rem;
+.about-section .section-title {
+  font-size: 1.5rem;
   color: var(--text-primary);
   margin-bottom: 40px;
   text-align: center;
@@ -39,8 +39,8 @@
     padding: 60px 16px;
   }
 
-  .section-title {
-    font-size: 2.25rem;
+  .about-section .section-title {
+    font-size: 1.5rem;
     margin-bottom: 32px;
   }
 

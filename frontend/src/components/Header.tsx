@@ -11,8 +11,10 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ name, title }) => {
   const location = useLocation();
 
-  // Pages where hero section should be hidden
+  // Pages where hero section should be hidden (all pages use same top spacing for section titles)
   const pagesWithoutHero = [
+    "/",
+    "/about",
     "/globe",
     "/contact",
     "/timeline",

@@ -9,7 +9,7 @@ const About: React.FC<AboutProps> = ({ bio }) => {
   return (
     <section className="section about-section">
       <div className="section-content">
-        <h2 className="section-title">About Me</h2>
+        <h1 className="section-title">Software Engineer</h1>
         <p className="about-bio">{bio}</p>
       </div>
     </section>

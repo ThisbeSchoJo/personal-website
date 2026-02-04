@@ -13,7 +13,7 @@ CORS(app)
 portfolio_data = {
     "name": "Thisbe Scholfield-Johnson",
     "title": "Software Engineer",
-    "bio": "Full-stack developer experienced in Python with Flask and JavaScript with a background in STEM research and consulting. Possess strong skills in creative problem-solving and user-centered thinking that help innovative, experience-driven companies build intuitive and meaningful applications.",
+    "bio": "Full-stack developer building purposeful apps that help people express themselves, make thoughtful choices, and enjoy life more intentionally. With a background in STEM research and consulting, I work at the intersection of data, design, and human behavior to create user-centered experiences that connect people with the world around them.",
     "email": "thisbeschojo@gmail.com",
     "phone": "417-389-4611",
     "location": "Brooklyn, New York",
@@ -38,7 +38,7 @@ portfolio_data = {
             "technologies": ["React", "JavaScript", "Flask", "Python"],
             "github": "https://github.com/thisbeschojo/chickens",
             "demoVideo": None,
-            "image": "https://via.placeholder.com/400x300/764ba2/ffffff?text=Chickens",
+            "image": "fallback-screenshot.png",
             "status": "In Progress"
         },
         {
@@ -48,7 +48,7 @@ portfolio_data = {
             "technologies": ["TypeScript", "Node.js", "USDA FoodData API"],
             "github": "https://github.com/thisbeschojo/happy-food",
             "demoVideo": "https://youtu.be/D6VTj3kSKYY?si=xcKVSUdVhTHOF3O2",
-            "image": "https://via.placeholder.com/400x300/f5c2c2/1a1a1a?text=Happy+Food"
+            "image": "fallback-screenshot.png"
         },
         {
             "id": 4,
