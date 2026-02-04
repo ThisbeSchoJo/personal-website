@@ -24,8 +24,10 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
                   <div className="project-image-container">
                     <img
                       src={project.image}
-                      alt={project.title}
+                      alt={`${project.title} screenshot`}
                       className="project-image"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   {project.status === "In Progress" && (
