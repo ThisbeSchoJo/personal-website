@@ -57,7 +57,7 @@ portfolio_data = {
             "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy", "OpenAI GPT-3.5"],
             "github": "https://github.com/thisbeschojo/moodring",
             "demoVideo": "https://youtu.be/bG4ZhJL69BE?si=MrkOQnMnXmA8_ufy",
-            "image": "https://via.placeholder.com/400x300/667eea/ffffff?text=MoodRing"
+            "image": "/images/portfolio/moodring-screenshot.png"
         },
         {
             "id": 5,
@@ -66,7 +66,7 @@ portfolio_data = {
             "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy", "JWT", "Google Maps API", "Chart.js"],
             "github": "https://github.com/thisbeschojo/still-strava",
             "demoVideo": "https://youtu.be/iDY6MuXFTGE?si=xFC3k54P1PN8VDwE",
-            "image": "https://via.placeholder.com/400x300/764ba2/ffffff?text=Still+Strava"
+            "image": "/images/portfolio/stillstrava-screenshot.png"
         },
         {
             "id": 6,
@@ -75,7 +75,7 @@ portfolio_data = {
             "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy", "Google Maps API", "iNaturalist API"],
             "github": "https://github.com/thisbeschojo/firefly-finder",
             "demoVideo": "https://youtu.be/wXEtFoRQyhs?si=zysyXjCuZcV28noX",
-            "image": "https://via.placeholder.com/400x300/f5c2c2/1a1a1a?text=Firefly+Finder"
+            "image": "/images/portfolio/fireflyfinder-screenshot.png"
         },
         {
             "id": 7,
@@ -84,7 +84,7 @@ portfolio_data = {
             "technologies": ["React", "JavaScript", "Flask", "Python", "SQLAlchemy"],
             "github": "https://github.com/thisbeschojo/natural-dye-lab",
             "demoVideo": "https://youtu.be/wu4RoJ_DpQU?si=oFPNedMcrXbxreEp",
-            "image": "https://via.placeholder.com/400x300/667eea/ffffff?text=Natural+Dye+Lab"
+            "image": "/images/portfolio/naturaldyelab-screenshot.png"
         },
         {
             "id": 8,
@@ -93,7 +93,7 @@ portfolio_data = {
             "technologies": ["Python", "SQLAlchemy", "CLI"],
             "github": "https://github.com/thisbeschojo/your-life-in-weeks",
             "demoVideo": "https://youtu.be/TV8Ulysskbw?si=DYJr4IJITatYua1L",
-            "image": "https://via.placeholder.com/400x300/764ba2/ffffff?text=Your+Life+in+Weeks"
+            "image": "/images/portfolio/yourlifeinweeks-screenshot.png"
         },
         {
             "id": 9,
@@ -102,7 +102,7 @@ portfolio_data = {
             "technologies": ["React", "JavaScript", "json-server"],
             "github": "https://github.com/thisbeschojo/the-abyss-gazes-back",
             "demoVideo": "https://youtu.be/MqlsRGpNook?si=4bATnjXqx4W6091M",
-            "image": "https://via.placeholder.com/400x300/f5c2c2/1a1a1a?text=The+Abyss+Gazes+Back"
+            "image": "/images/portfolio/theabyssgazesback-screenshot.png"
         }
     ],
     "skills": {

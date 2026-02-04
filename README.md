@@ -130,7 +130,7 @@ To add project screenshots without hurting performance:
 2. **Optimize before adding**: resize to ~800×600px (or 800px wide) and compress with [Squoosh](https://squoosh.app/) or [TinyPNG](https://tinypng.com/) so each image is under ~150 KB.
 3. **Point the backend at them**: in `backend/app.py`, set each project’s `"image"` to `"/images/portfolio/your-filename.jpg"`.
 
-The portfolio grid uses `loading="lazy"` and `decoding="async"` so images load only when near the viewport. See `frontend/public/images/portfolio/README.md` for more detail.
+The portfolio grid uses `loading="lazy"` and `decoding="async"` so images load only when near the viewport.
 
 ### Styling
 
