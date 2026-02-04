@@ -75,27 +75,6 @@ const TimelinePage: React.FC = () => {
     return { timelineEvents: sortedEvents, yearRange };
   }, [portfolioData]);
 
-  const calculatePosition = (year: number, month?: number): number => {
-    if (yearRange.end === yearRange.start) return 50;
-
-    // Calculate position within the year (0-1, where 0 is start of year, 1 is end of year)
-    const monthPosition = month ? (month - 1) / 12 : 0.5; // Default to mid-year (month 6)
-
-    // Calculate base position for the year
-    // All years get equal spacing
-    const totalYears = yearRange.end - yearRange.start + 1;
-    const yearIndex = year - yearRange.start;
-    const yearPercent = 100 / totalYears;
-
-    const yearStart = yearIndex * yearPercent;
-    const yearEnd = (yearIndex + 1) * yearPercent;
-
-    const yearRangePercent = yearEnd - yearStart;
-
-    // Position within the year range
-    return yearStart + monthPosition * yearRangePercent;
-  };
-
   const toggleEntry = (entryId: string) => {
     setExpandedEntries((prev) => {
       const newSet = new Set(prev);
