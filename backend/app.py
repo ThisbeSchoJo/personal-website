@@ -106,9 +106,10 @@ portfolio_data = {
         }
     ],
     "skills": {
-        "frontend": ["React", "TypeScript", "JavaScript", "CSS", "HTML"],
-        "backend": ["Python", "Flask", "Node.js", "RESTful APIs"],
-        "tools": ["SQL", "PyTest", "Mocha", "Git", "GitHub"]
+        "frontend": ["React", "TypeScript", "Next.js", "JavaScript", "CSS", "HTML", "Tailwind CSS"],
+        "backend": ["Node.js", "Python", "Flask", "RESTful APIs", "PostgreSQL", "SQLAlchemy"],
+        "tools": ["Git", "GitHub", "Vercel", "Render", "SQL", "PyTest", "Mocha"],
+        "design": ["Figma", "Wireframing", "Component Design"]
     },
     "timeline": [
         {

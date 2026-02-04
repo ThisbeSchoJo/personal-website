@@ -14,6 +14,7 @@ export interface Skills {
   frontend: string[];
   backend: string[];
   tools: string[];
+  design: string[];
 }
 
 export interface TimelineEntry {

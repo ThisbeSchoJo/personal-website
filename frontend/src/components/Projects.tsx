@@ -12,9 +12,12 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
       <div className="section-content">
         <h2 className="section-title">Portfolio</h2>
         <p className="projects-intro">
-          I love planning events, making websites, and working on projects. Here
-          you will find a collection of my work across internships, classes,
-          personal projects, and extracurriculars.
+        Please enjoy this selection of current and past projects, 
+        which together reflect my ongoing learning journey—from 
+        simple frontend applications to fully deployed, 
+        production-ready full-stack apps, with a focus on clean 
+        architecture, 
+        usability, and real-world constraints.
         </p>
         <div className="projects-grid">
           {projects.map((project) => (

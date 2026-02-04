@@ -42,6 +42,18 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
               ))}
             </div>
           </div>
+          {skills.design && skills.design.length > 0 && (
+            <div className="skill-category">
+              <h3 className="skill-category-title">Design</h3>
+              <div className="skill-tags">
+                {skills.design.map((skill, index) => (
+                  <span key={index} className="skill-tag">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>
