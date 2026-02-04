@@ -84,7 +84,7 @@
 }
 
 .nav-link.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -135,4 +135,3 @@
     font-size: 2rem;
   }
 }
-

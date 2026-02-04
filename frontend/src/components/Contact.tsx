@@ -1,6 +1,12 @@
-import React from 'react';
-import { FaEnvelope, FaGithub, FaLinkedin, FaSpotify, FaMedium } from 'react-icons/fa';
-import './Contact.css';
+import React from "react";
+import {
+  FaEnvelope,
+  FaGithub,
+  FaLinkedin,
+  FaSpotify,
+  FaMedium,
+} from "react-icons/fa";
+import "../styles/Contact.css";
 
 interface ContactProps {
   email: string;
@@ -14,7 +20,8 @@ const Contact: React.FC<ContactProps> = ({ email, github, linkedin }) => {
       <div className="section-content">
         <h2 className="section-title">Get In Touch</h2>
         <p className="contact-description">
-          I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+          I'm always open to discussing new projects, creative ideas, or
+          opportunities to be part of your visions.
         </p>
         <div className="contact-links">
           <a href={`mailto:${email}`} className="contact-link">
@@ -64,4 +71,3 @@ const Contact: React.FC<ContactProps> = ({ email, github, linkedin }) => {
 };
 
 export default Contact;
-

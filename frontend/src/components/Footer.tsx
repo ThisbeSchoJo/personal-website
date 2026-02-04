@@ -1,5 +1,5 @@
-import React from 'react';
-import './Footer.css';
+import React from "react";
+import "../styles/Footer.css";
 
 interface FooterProps {
   name: string;
@@ -10,11 +10,14 @@ const Footer: React.FC<FooterProps> = ({ name }) => {
 
   return (
     <footer className="footer">
-      <p>&copy; {currentYear} {name}. All rights reserved.</p>
-      <p className="footer-subtitle">Built with React, TypeScript, Flask, and Python</p>
+      <p>
+        &copy; {currentYear} {name}. All rights reserved.
+      </p>
+      <p className="footer-subtitle">
+        Built with React, TypeScript, Flask, and Python
+      </p>
     </footer>
   );
 };
 
 export default Footer;
-

@@ -27,7 +27,9 @@
   border: 1px solid var(--card-border);
   border-radius: var(--border-radius);
   resize: vertical;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .ideas-textarea:focus {
@@ -125,4 +127,3 @@
     font-size: 0.85rem;
   }
 }
-

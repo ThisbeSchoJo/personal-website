@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Footer from '../components/Footer';
-import { PortfolioData } from '../types';
-import './BooksPage.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Footer from "../components/Footer";
+import { PortfolioData } from "../types";
+import "../styles/BooksPage.css";
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
+const API_BASE_URL =
+  process.env.REACT_APP_API_URL || "http://localhost:5001/api";
 
 interface Book {
   id: string;
@@ -18,7 +19,9 @@ interface Book {
 }
 
 const BooksPage: React.FC = () => {
-  const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(null);
+  const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(
+    null,
+  );
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -29,7 +32,7 @@ const BooksPage: React.FC = () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/portfolio`);
         setPortfolioData(response.data);
-        
+
         // Automatically fetch books if Goodreads user ID is available
         if (response.data.goodreads_user_id) {
           fetchBooks(response.data.goodreads_user_id);
@@ -38,7 +41,7 @@ const BooksPage: React.FC = () => {
         }
       } catch (err) {
         setLoading(false);
-        console.error('Error fetching portfolio data:', err);
+        console.error("Error fetching portfolio data:", err);
       }
     };
 
@@ -47,7 +50,7 @@ const BooksPage: React.FC = () => {
 
   const fetchBooks = async (userId: string) => {
     if (!userId) {
-      setError('Goodreads user ID not configured');
+      setError("Goodreads user ID not configured");
       setLoading(false);
       return;
     }
@@ -57,12 +60,15 @@ const BooksPage: React.FC = () => {
 
     try {
       const response = await axios.get(`${API_BASE_URL}/goodreads`, {
-        params: { user_id: userId }
+        params: { user_id: userId },
       });
-      
+
       setBooks(response.data.books || []);
     } catch (err: any) {
-      const errorMessage = err.response?.data?.error || err.response?.data?.details || 'Failed to fetch books from Goodreads';
+      const errorMessage =
+        err.response?.data?.error ||
+        err.response?.data?.details ||
+        "Failed to fetch books from Goodreads";
       setError(errorMessage);
       setBooks([]);
     } finally {
@@ -86,9 +92,12 @@ const BooksPage: React.FC = () => {
 
           {error && (
             <div className="books-error">
-              <p><strong>Error:</strong> {error}</p>
+              <p>
+                <strong>Error:</strong> {error}
+              </p>
               <p className="books-error-help">
-                Make sure your Goodreads profile is public and you have books on your "read" shelf.
+                Make sure your Goodreads profile is public and you have books on
+                your "read" shelf.
               </p>
             </div>
           )}
@@ -118,7 +127,7 @@ const BooksPage: React.FC = () => {
                         alt={`${book.title} by ${book.author}`}
                         className="book-cover"
                         onError={(e) => {
-                          (e.target as HTMLImageElement).style.display = 'none';
+                          (e.target as HTMLImageElement).style.display = "none";
                         }}
                       />
                     ) : (
@@ -131,7 +140,8 @@ const BooksPage: React.FC = () => {
                       <p className="book-author">{book.author}</p>
                       {book.rating && (
                         <div className="book-rating">
-                          {'★'.repeat(book.rating)}{'☆'.repeat(5 - book.rating)}
+                          {"★".repeat(book.rating)}
+                          {"☆".repeat(5 - book.rating)}
                         </div>
                       )}
                     </div>
@@ -141,11 +151,16 @@ const BooksPage: React.FC = () => {
             </>
           )}
 
-          {!loading && books.length === 0 && !error && portfolioData?.goodreads_user_id && (
-            <div className="books-empty">
-              <p>No books found. Make sure your Goodreads profile is public.</p>
-            </div>
-          )}
+          {!loading &&
+            books.length === 0 &&
+            !error &&
+            portfolioData?.goodreads_user_id && (
+              <div className="books-empty">
+                <p>
+                  No books found. Make sure your Goodreads profile is public.
+                </p>
+              </div>
+            )}
         </div>
       </section>
       {portfolioData && <Footer name={portfolioData.name} />}
@@ -154,4 +169,3 @@ const BooksPage: React.FC = () => {
 };
 
 export default BooksPage;
-

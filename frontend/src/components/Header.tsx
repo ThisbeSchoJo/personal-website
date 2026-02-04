@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
-import "./Header.css";
+import "../styles/Header.css";
 
 interface HeaderProps {
   name: string;
@@ -10,9 +10,18 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ name, title }) => {
   const location = useLocation();
-  
+
   // Pages where hero section should be hidden
-  const pagesWithoutHero = ["/globe", "/contact", "/timeline", "/skills", "/projects", "/portfolio", "/ideas", "/books"];
+  const pagesWithoutHero = [
+    "/globe",
+    "/contact",
+    "/timeline",
+    "/skills",
+    "/projects",
+    "/portfolio",
+    "/ideas",
+    "/books",
+  ];
   const shouldShowHero = !pagesWithoutHero.includes(location.pathname);
 
   return (
@@ -40,7 +49,10 @@ const Header: React.FC<HeaderProps> = ({ name, title }) => {
           <Link
             to="/portfolio"
             className={`nav-link ${
-              location.pathname === "/portfolio" || location.pathname === "/projects" ? "active" : ""
+              location.pathname === "/portfolio" ||
+              location.pathname === "/projects"
+                ? "active"
+                : ""
             }`}
           >
             portfolio

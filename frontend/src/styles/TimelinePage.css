@@ -128,7 +128,9 @@
 
 [data-theme="dark"] .timeline-event-bullet {
   border-color: var(--bg-primary);
-  box-shadow: 0 0 0 2px var(--accent-pink), 0 0 8px rgba(245, 194, 194, 0.3);
+  box-shadow:
+    0 0 0 2px var(--accent-pink),
+    0 0 8px rgba(245, 194, 194, 0.3);
 }
 
 .timeline-event-popup {
@@ -156,7 +158,6 @@
   border-color: var(--accent-pink);
   transform: translateX(4px);
 }
-
 
 .timeline-entry-header {
   display: flex;

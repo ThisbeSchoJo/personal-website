@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import Footer from "../components/Footer";
 import { PortfolioData, TimelineItem } from "../types";
-import "./TimelinePage.css";
+import "../styles/TimelinePage.css";
 
 const API_BASE_URL =
   process.env.REACT_APP_API_URL || "http://localhost:5001/api";
@@ -19,11 +19,11 @@ interface TimelineEvent {
 
 const TimelinePage: React.FC = () => {
   const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(
-    null
+    null,
   );
   const [loading, setLoading] = useState(true);
   const [expandedEntries, setExpandedEntries] = useState<Set<string>>(
-    new Set()
+    new Set(),
   );
 
   useEffect(() => {
@@ -86,7 +86,7 @@ const TimelinePage: React.FC = () => {
     const totalYears = yearRange.end - yearRange.start + 1;
     const yearIndex = year - yearRange.start;
     const yearPercent = 100 / totalYears;
-    
+
     const yearStart = yearIndex * yearPercent;
     const yearEnd = (yearIndex + 1) * yearPercent;
 
@@ -205,11 +205,14 @@ const TimelinePage: React.FC = () => {
                   // Start entries below the year marker (offset of ~8% of year range)
                   const startOffset = 0.08;
                   // Spacing between entries (reduced)
-                  const spacing = numEvents > 1 ? Math.min(0.17, 0.9 / numEvents) : 0;
-                  const adjustedPositions: number[] = sortedYearEvents.map((_, index) => {
-                    // Start below year marker and stack downward
-                    return startOffset + index * spacing;
-                  });
+                  const spacing =
+                    numEvents > 1 ? Math.min(0.17, 0.9 / numEvents) : 0;
+                  const adjustedPositions: number[] = sortedYearEvents.map(
+                    (_, index) => {
+                      // Start below year marker and stack downward
+                      return startOffset + index * spacing;
+                    },
+                  );
 
                   return (
                     <div key={year}>
@@ -224,7 +227,8 @@ const TimelinePage: React.FC = () => {
                       </div>
                       {sortedYearEvents.map((event, eventIndex) => {
                         const isExpanded = expandedEntries.has(event.id);
-                        const positionWithinYear = adjustedPositions[eventIndex];
+                        const positionWithinYear =
+                          adjustedPositions[eventIndex];
                         const eventPosition =
                           yearStart + positionWithinYear * yearRangePercent;
 

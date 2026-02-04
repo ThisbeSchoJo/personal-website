@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './IdeasPage.css';
+import React, { useState, useEffect, useRef } from "react";
+import "../styles/IdeasPage.css";
 
 interface Idea {
   id: number;
@@ -11,13 +11,13 @@ interface Idea {
 }
 
 const IdeasPage: React.FC = () => {
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState("");
   const [ideas, setIdeas] = useState<Idea[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Load ideas from localStorage on mount
   useEffect(() => {
-    const savedIdeas = localStorage.getItem('ideas');
+    const savedIdeas = localStorage.getItem("ideas");
     if (savedIdeas) {
       try {
         const parsed = JSON.parse(savedIdeas);
@@ -25,23 +25,29 @@ const IdeasPage: React.FC = () => {
           // Initialize with random positions and velocities if missing
           const initialized = parsed.map((idea: any) => ({
             id: idea.id || Date.now() + Math.random(),
-            text: idea.text || '',
-            x: typeof idea.x === 'number' ? idea.x : Math.random() * 80 + 10,
-            y: typeof idea.y === 'number' ? idea.y : Math.random() * 60 + 10,
-            vx: typeof idea.vx === 'number' ? idea.vx : (Math.random() - 0.5) * 0.5,
-            vy: typeof idea.vy === 'number' ? idea.vy : (Math.random() - 0.5) * 0.5,
+            text: idea.text || "",
+            x: typeof idea.x === "number" ? idea.x : Math.random() * 80 + 10,
+            y: typeof idea.y === "number" ? idea.y : Math.random() * 60 + 10,
+            vx:
+              typeof idea.vx === "number"
+                ? idea.vx
+                : (Math.random() - 0.5) * 0.5,
+            vy:
+              typeof idea.vy === "number"
+                ? idea.vy
+                : (Math.random() - 0.5) * 0.5,
           }));
           setIdeas(initialized);
         }
       } catch (e) {
-        console.error('Error loading ideas:', e);
+        console.error("Error loading ideas:", e);
       }
     }
   }, []);
 
   // Save ideas to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem('ideas', JSON.stringify(ideas));
+    localStorage.setItem("ideas", JSON.stringify(ideas));
   }, [ideas]);
 
   // Animation loop for moving ideas
@@ -49,8 +55,8 @@ const IdeasPage: React.FC = () => {
     if (ideas.length === 0) return;
 
     const interval = setInterval(() => {
-      setIdeas(prevIdeas => 
-        prevIdeas.map(idea => {
+      setIdeas((prevIdeas) =>
+        prevIdeas.map((idea) => {
           let newX = idea.x + idea.vx;
           let newY = idea.y + idea.vy;
           let newVx = idea.vx;
@@ -83,7 +89,7 @@ const IdeasPage: React.FC = () => {
             vx: newVx,
             vy: newVy,
           };
-        })
+        }),
       );
     }, 50); // Update every 50ms for smooth animation
 
@@ -105,19 +111,19 @@ const IdeasPage: React.FC = () => {
         vx: (Math.random() - 0.5) * 0.5,
         vy: (Math.random() - 0.5) * 0.5,
       };
-      setIdeas(prev => [...prev, newIdea]);
-      setInputText('');
+      setIdeas((prev) => [...prev, newIdea]);
+      setInputText("");
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+    if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
       handleSubmit(e);
     }
   };
 
   const handleDelete = (id: number) => {
-    setIdeas(prev => prev.filter(idea => idea.id !== id));
+    setIdeas((prev) => prev.filter((idea) => idea.id !== id));
   };
 
   return (
@@ -138,7 +144,7 @@ const IdeasPage: React.FC = () => {
           </button>
         </form>
         <div ref={containerRef} className="ideas-display-container">
-          {ideas.map(idea => (
+          {ideas.map((idea) => (
             <div
               key={idea.id}
               className="idea-card"
@@ -158,4 +164,3 @@ const IdeasPage: React.FC = () => {
 };
 
 export default IdeasPage;
-

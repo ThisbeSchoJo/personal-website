@@ -1,5 +1,5 @@
 import React from "react";
-import "./Projects.css";
+import "../styles/Projects.css";
 import { Project } from "../types";
 
 interface ProjectsProps {

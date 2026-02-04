@@ -1,5 +1,5 @@
-import React from 'react';
-import './About.css';
+import React from "react";
+import "../styles/About.css";
 
 interface AboutProps {
   bio: string;
@@ -17,4 +17,3 @@ const About: React.FC<AboutProps> = ({ bio }) => {
 };
 
 export default About;
-

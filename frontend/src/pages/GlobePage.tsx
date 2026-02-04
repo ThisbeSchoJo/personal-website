@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import GlobeComponent from '../components/Globe';
-import { PortfolioData } from '../types';
-import './GlobePage.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import GlobeComponent from "../components/Globe";
+import { PortfolioData } from "../types";
+import "../styles/GlobePage.css";
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
+const API_BASE_URL =
+  process.env.REACT_APP_API_URL || "http://localhost:5001/api";
 
 const GlobePage: React.FC = () => {
-  const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(null);
+  const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(
+    null,
+  );
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,7 +21,7 @@ const GlobePage: React.FC = () => {
         setLoading(false);
       } catch (err) {
         setLoading(false);
-        console.error('Error fetching portfolio data:', err);
+        console.error("Error fetching portfolio data:", err);
       }
     };
 
@@ -26,7 +29,11 @@ const GlobePage: React.FC = () => {
   }, []);
 
   if (loading || !portfolioData) {
-    return <div className="loading-container"><div className="spinner"></div></div>;
+    return (
+      <div className="loading-container">
+        <div className="spinner"></div>
+      </div>
+    );
   }
 
   return (
@@ -53,4 +60,3 @@ const GlobePage: React.FC = () => {
 };
 
 export default GlobePage;
-
