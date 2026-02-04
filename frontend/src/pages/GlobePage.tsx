@@ -45,11 +45,13 @@ const GlobePage: React.FC = () => {
             <div className="globe-legend">
               <div className="legend-item">
                 <span className="legend-dot legend-dot-red"></span>
-                <span className="legend-label">Places lived</span>
+                <span className="legend-label">
+                  Places I've lived (3+ months)
+                </span>
               </div>
               <div className="legend-item">
                 <span className="legend-dot legend-dot-cyan"></span>
-                <span className="legend-label">Places visited</span>
+                <span className="legend-label">Places I've visited</span>
               </div>
             </div>
           </div>

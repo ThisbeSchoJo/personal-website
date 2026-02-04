@@ -106,7 +106,7 @@ portfolio_data = {
         }
     ],
     "skills": {
-        "frontend": ["React", "JavaScript", "CSS", "HTML"],
+        "frontend": ["React", "TypeScript", "JavaScript", "CSS", "HTML"],
         "backend": ["Python", "Flask", "Node.js", "RESTful APIs"],
         "tools": ["SQL", "PyTest", "Mocha", "Git", "GitHub"]
     },

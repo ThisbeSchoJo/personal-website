@@ -62,7 +62,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--text-primary);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .legend-dot {
@@ -81,7 +81,7 @@
 }
 
 .legend-label {
-  color: var(--text-primary);
+  color: rgba(255, 255, 255, 0.95);
   font-weight: 400;
 }
 
