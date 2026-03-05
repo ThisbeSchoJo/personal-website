@@ -131,12 +131,6 @@ const About: React.FC<AboutProps> = ({ portfolioData }) => {
               </a>
             )}
           </div>
-
-          <div className="about-cta">
-            <Link to="/contact" className="about-cta-link">
-              Let&apos;s connect →
-            </Link>
-          </div>
         </div>
     </section>
   );
