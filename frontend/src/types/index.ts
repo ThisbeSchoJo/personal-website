@@ -33,10 +33,20 @@ export interface TimelineItem {
   entries: TimelineEntry[];
 }
 
+export interface AboutSection {
+  title: string;
+  content: string;
+}
+
 export interface PortfolioData {
   name: string;
   title: string;
   bio: string;
+  tagline?: string;
+  highlights?: string[];
+  what_im_looking_for?: string;
+  resume_url?: string;
+  about_sections?: AboutSection[];
   email: string;
   phone?: string;
   location?: string;

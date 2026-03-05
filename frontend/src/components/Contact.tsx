@@ -3,10 +3,21 @@ import {
   FaEnvelope,
   FaGithub,
   FaLinkedin,
-  FaSpotify,
   FaMedium,
 } from "react-icons/fa";
 import "../styles/Contact.css";
+
+const StravaIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    aria-hidden
+  >
+    <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.582l2.836 5.599h4.172L10.463 0 3.5 10.172h4.169" />
+  </svg>
+);
 
 interface ContactProps {
   email: string;
@@ -56,13 +67,13 @@ const Contact: React.FC<ContactProps> = ({ email, github, linkedin }) => {
             Blog
           </a>
           <a
-            href="https://open.spotify.com/user/thisbeschojo"
+            href="https://www.strava.com/athletes/93340815"
             target="_blank"
             rel="noopener noreferrer"
             className="contact-link"
           >
-            <FaSpotify className="contact-icon" />
-            Spotify
+            <StravaIcon className="contact-icon contact-icon-strava" />
+            Strava
           </a>
         </div>
       </div>

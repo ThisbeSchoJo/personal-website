@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Footer from "../components/Footer";
-import { PortfolioData } from "../types";
 import "../styles/BooksPage.css";
-
-const API_BASE_URL =
-  process.env.REACT_APP_API_URL || "http://localhost:5001/api";
 
 interface Book {
   id: string;
@@ -18,35 +14,30 @@ interface Book {
   description?: string;
 }
 
-const BooksPage: React.FC = () => {
-  const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(
-    null,
-  );
+interface BooksPageProps {
+  goodreadsUserId?: string;
+  portfolioName?: string;
+}
+
+const API_BASE_URL =
+  process.env.REACT_APP_API_URL || "http://localhost:5001/api";
+
+const BooksPage: React.FC<BooksPageProps> = ({
+  goodreadsUserId,
+  portfolioName,
+}) => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch portfolio data to get Goodreads user ID
   useEffect(() => {
-    const fetchPortfolioData = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/portfolio`);
-        setPortfolioData(response.data);
-
-        // Automatically fetch books if Goodreads user ID is available
-        if (response.data.goodreads_user_id) {
-          fetchBooks(response.data.goodreads_user_id);
-        } else {
-          setLoading(false);
-        }
-      } catch (err) {
-        setLoading(false);
-        console.error("Error fetching portfolio data:", err);
-      }
-    };
-
-    fetchPortfolioData();
-  }, []);
+    if (goodreadsUserId) {
+      fetchBooks(goodreadsUserId);
+    } else {
+      setLoading(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [goodreadsUserId]);
 
   const fetchBooks = async (userId: string) => {
     if (!userId) {
@@ -76,7 +67,7 @@ const BooksPage: React.FC = () => {
     }
   };
 
-  if (loading && !portfolioData) {
+  if (loading && !books.length && !error) {
     return (
       <div className="loading-container">
         <div className="spinner"></div>
@@ -151,10 +142,7 @@ const BooksPage: React.FC = () => {
             </>
           )}
 
-          {!loading &&
-            books.length === 0 &&
-            !error &&
-            portfolioData?.goodreads_user_id && (
+          {!loading && books.length === 0 && !error && goodreadsUserId && (
               <div className="books-empty">
                 <p>
                   No books found. Make sure your Goodreads profile is public.
@@ -163,7 +151,7 @@ const BooksPage: React.FC = () => {
             )}
         </div>
       </section>
-      {portfolioData && <Footer name={portfolioData.name} />}
+      {portfolioName && <Footer name={portfolioName} />}
     </>
   );
 };

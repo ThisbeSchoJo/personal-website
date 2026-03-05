@@ -16,9 +16,9 @@ Short records of important architecture and design decisions.
 
 ## ADR-2: No database; content in code
 
-**Context:** Portfolio data (bio, projects, skills, timeline) changes infrequently.
+**Context:** Portfolio data (bio, projects, skills, contact) changes infrequently.
 
-**Decision:** Store all portfolio content in `backend/app.py` in a single `portfolio_data` structure. No DB or CMS.
+**Decision:** Store portfolio content in `backend/app.py` in a single `portfolio_data` structure. Resume experience and education live in the frontend (`ResumePage.tsx`). No DB or CMS.
 
 **Consequences:** Simple to run and deploy; no migrations or backups for content. Edits require code change and redeploy. Suitable for a single-owner portfolio.
 
@@ -64,10 +64,20 @@ Short records of important architecture and design decisions.
 
 ---
 
-## ADR-7: Collapsible nav and flow-based timeline on mobile
+## ADR-7: Collapsible nav on mobile
 
-**Context:** Nav had many links and timeline used absolute positioning; both were poor on small screens.
+**Context:** Nav had many links; inline nav was poor on small screens.
 
-**Decision:** Below 768px: (1) Replace inline nav with a hamburger that toggles a vertical nav list. (2) Timeline: switch to flow layout (static positioning); year groups and events stack vertically; expanded details below the entry; hide vertical/connector lines.
+**Decision:** Below 768px, replace inline nav with a hamburger that toggles a vertical nav list.
 
-**Consequences:** Mobile UX improved; one extra state (menu open/closed) and more CSS in media queries.
+**Consequences:** Mobile UX improved; one extra state (menu open/closed) and media-query CSS.
+
+---
+
+## ADR-8: Single about route, resume page, centralized data fetch
+
+**Context:** Duplicate `/` and `/about` was redundant; timeline was hard to maintain; skills and resume were separate; each page was fetching portfolio data.
+
+**Decision:** (1) Use a single route `/` for the about (home) page; remove `/about`. (2) Replace the timeline tab with a Resume page (`/resume`) showing experience, education, and skills (skills moved from a separate tab). (3) Fetch portfolio once in `App.tsx` and pass `portfolioData`, `loading`, and `error` as props to pages; remove per-page portfolio fetches. (4) Remove unused pages and components (Globe, Ideas, Timeline, standalone Skills).
+
+**Consequences:** One source of truth for portfolio load; simpler nav and routes; resume is the single place for experience, education, and skills; less code to maintain.

@@ -1,41 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import About from '../components/About';
-import Footer from '../components/Footer';
-import { PortfolioData } from '../types';
+import React from "react";
+import About from "../components/About";
+import Footer from "../components/Footer";
+import { PortfolioData } from "../types";
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
+interface AboutPageProps {
+  portfolioData: PortfolioData | null;
+  loading: boolean;
+  error: string | null;
+}
 
-const AboutPage: React.FC = () => {
-  const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(null);
-  const [loading, setLoading] = useState(true);
+const AboutPage: React.FC<AboutPageProps> = ({
+  portfolioData,
+  loading,
+  error,
+}) => {
+  if (loading && !portfolioData) {
+    return null;
+  }
 
-  useEffect(() => {
-    const fetchPortfolioData = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/portfolio`);
-        setPortfolioData(response.data);
-        setLoading(false);
-      } catch (err) {
-        setLoading(false);
-        console.error('Error fetching portfolio data:', err);
-      }
-    };
-
-    fetchPortfolioData();
-  }, []);
-
-  if (loading || !portfolioData) {
-    return <div className="loading-container"><div className="spinner"></div></div>;
+  if (!portfolioData || error) {
+    return null;
   }
 
   return (
     <>
-      <About bio={portfolioData.bio} />
+      <About portfolioData={portfolioData} />
       <Footer name={portfolioData.name} />
     </>
   );
 };
 
 export default AboutPage;
-

@@ -18,6 +18,20 @@
   color: var(--text-primary);
 }
 
+/* When shown inside main (nav visible), don't take full viewport */
+.loading-in-main,
+.error-in-main {
+  min-height: 40vh;
+  padding: 2rem 1rem;
+}
+
+.error-hint {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
 .spinner {
   border: 3px solid var(--border-color);
   border-top: 3px solid var(--accent-pink);

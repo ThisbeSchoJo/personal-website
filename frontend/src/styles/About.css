@@ -14,14 +14,48 @@
   text-align: center;
 }
 
-.about-section .section-title {
+.about-section {
+  scroll-margin-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-section .section-content {
+  position: relative;
+  z-index: 1;
+  animation: aboutFadeIn 0.6s ease-out;
+}
+
+@keyframes aboutFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about-section .section-title.about-title {
   font-size: 1.5rem;
   color: var(--text-primary);
-  margin-bottom: 40px;
+  margin-bottom: 12px;
   text-align: center;
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
+}
+
+.about-tagline {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+  font-style: italic;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .about-bio {
@@ -30,12 +64,223 @@
   color: var(--text-primary);
   text-align: left;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0 auto 36px;
   font-weight: 400;
 }
 
-.about-section {
-  scroll-margin-top: 80px;
+/* Highlights row */
+.about-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px 32px;
+  margin-bottom: 40px;
+}
+
+.about-highlight-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.about-highlight-item:hover {
+  border-color: var(--accent-pink);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.about-highlight-icon {
+  color: var(--accent-pink);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* What I'm looking for */
+.about-looking-for {
+  margin-bottom: 40px;
+  padding: 24px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+}
+
+.about-subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 12px;
+}
+
+.about-looking-for-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Accordion */
+.about-accordion {
+  margin-bottom: 40px;
+}
+
+.about-accordion-item {
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+.about-accordion-item:last-child {
+  margin-bottom: 0;
+}
+
+.about-accordion-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: background 0.2s ease;
+}
+
+.about-accordion-trigger:hover {
+  background: rgba(245, 194, 194, 0.1);
+}
+
+.about-accordion-icon {
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.about-accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.about-accordion-content.about-accordion-expanded {
+  max-height: 2000px;
+}
+
+.about-accordion-content p {
+  padding: 0 20px 20px;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--card-border);
+  padding-top: 16px;
+  margin-top: 0;
+}
+
+/* Links row */
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.about-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 1px solid var(--text-primary);
+}
+
+.about-link:hover {
+  background: var(--accent-pink);
+  border-color: var(--accent-pink);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.about-link-resume {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--card-border);
+}
+
+.about-link-resume:hover {
+  background: var(--accent-pink);
+  border-color: var(--accent-pink);
+}
+
+/* Resume button */
+.about-resume-cta {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.about-resume-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  background: var(--accent-pink);
+  color: var(--bg-primary);
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 1px solid var(--accent-pink);
+  transition: all 0.2s ease;
+}
+
+.about-resume-btn:hover {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: var(--bg-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* CTA */
+.about-cta {
+  text-align: center;
+}
+
+.about-cta-link {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent-pink);
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.about-cta-link:hover {
+  color: var(--accent-blue);
+  transform: translateX(4px);
 }
 
 @media (max-width: 768px) {
@@ -43,13 +288,54 @@
     padding: 60px 16px;
   }
 
-  .about-section .section-title {
+  .about-section .section-title.about-title {
     font-size: 1.5rem;
-    margin-bottom: 32px;
+    margin-bottom: 10px;
+  }
+
+  .about-tagline {
+    font-size: 1rem;
+    margin-bottom: 24px;
   }
 
   .about-bio {
     font-size: 1rem;
     line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .about-highlights {
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .about-highlight-item {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+
+  .about-looking-for {
+    padding: 20px;
+    margin-bottom: 32px;
+  }
+
+  .about-accordion-trigger {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+  }
+
+  .about-accordion-content p {
+    padding: 12px 16px 16px;
+    padding-top: 12px;
+  }
+
+  .about-links {
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .about-link {
+    padding: 10px 16px;
+    font-size: 0.85rem;
   }
 }

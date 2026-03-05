@@ -1,6 +1,6 @@
 # Personal Website
 
-Full-stack personal portfolio: React (TypeScript) frontend and Flask (Python) API. Content is edited in the backend; frontend and backend deploy separately.
+Full-stack personal portfolio: React (TypeScript) frontend and Flask (Python) API. Content is edited in the backend (and resume experience/education in the frontend); frontend and backend deploy separately.
 
 ## Prerequisites
 
@@ -29,9 +29,9 @@ npm start
 
 ## Edit content
 
-- **Bio, projects, skills, timeline, contact:** `backend/app.py` → `portfolio_data`.
+- **Bio, projects, skills, contact, Goodreads ID:** `backend/app.py` → `portfolio_data`.
+- **Resume (experience & education):** `frontend/src/pages/ResumePage.tsx` → `RESUME_EXPERIENCE` and `RESUME_EDUCATION`.
 - **Portfolio images:** Add optimized images to `frontend/public/images/portfolio/`, then set each project’s `"image": "/images/portfolio/filename.jpg"` in `portfolio_data`. See [docs/architecture.md](docs/architecture.md) for conventions.
-- **Globe “lived” / “visited” locations:** `frontend/src/components/Globe.tsx` (e.g. `livedLocations`, `visitedLocations`).
 
 ## Deploy
 

@@ -1,0 +1,160 @@
+.resume-section {
+  scroll-margin-top: 80px;
+}
+
+.resume-content {
+  max-width: 720px;
+}
+
+.resume-title {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.resume-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+.resume-summary {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0 0 40px;
+  text-align: center;
+}
+
+.resume-block {
+  margin-bottom: 40px;
+}
+
+.resume-block:last-child {
+  margin-bottom: 0;
+}
+
+.resume-block-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--card-border);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.resume-entry {
+  margin-bottom: 28px;
+}
+
+.resume-entry:last-child {
+  margin-bottom: 0;
+}
+
+.resume-entry-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.resume-entry-role {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.resume-entry-dates {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.resume-entry-company {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0 0 8px;
+}
+
+.resume-entry-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+}
+
+.resume-entry-bullets {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+.resume-entry-bullets li {
+  margin-bottom: 4px;
+}
+
+.resume-placeholder {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 24px 0;
+}
+
+/* Skills on resume */
+.resume-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.resume-skill-category {
+  background: var(--bg-secondary);
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+  padding: 20px;
+}
+
+.resume-skill-category-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 12px;
+}
+
+.resume-skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.resume-skill-tag {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid var(--card-border);
+}
+
+@media (max-width: 768px) {
+  .resume-entry-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .resume-entry-dates {
+    white-space: normal;
+  }
+}

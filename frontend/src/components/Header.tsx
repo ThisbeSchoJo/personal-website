@@ -17,14 +17,10 @@ const Header: React.FC<HeaderProps> = ({ name, title }) => {
   // Pages where hero section should be hidden (all pages use same top spacing for section titles)
   const pagesWithoutHero = [
     "/",
-    "/about",
-    "/globe",
     "/contact",
-    "/timeline",
-    "/skills",
+    "/resume",
     "/projects",
     "/portfolio",
-    "/ideas",
     "/books",
   ];
   const shouldShowHero = !pagesWithoutHero.includes(location.pathname);
@@ -59,12 +55,8 @@ const Header: React.FC<HeaderProps> = ({ name, title }) => {
           </div>
           <nav className={`header-nav ${menuOpen ? "header-nav-open" : ""}`}>
             <Link
-              to="/about"
-              className={`nav-link ${
-                location.pathname === "/" || location.pathname === "/about"
-                  ? "active"
-                  : ""
-              }`}
+              to="/"
+              className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
               onClick={closeMenu}
             >
               about
@@ -82,22 +74,13 @@ const Header: React.FC<HeaderProps> = ({ name, title }) => {
               portfolio
             </Link>
             <Link
-              to="/skills"
+              to="/resume"
               className={`nav-link ${
-                location.pathname === "/skills" ? "active" : ""
+                location.pathname === "/resume" ? "active" : ""
               }`}
               onClick={closeMenu}
             >
-              skills
-            </Link>
-            <Link
-              to="/timeline"
-              className={`nav-link ${
-                location.pathname === "/timeline" ? "active" : ""
-              }`}
-              onClick={closeMenu}
-            >
-              timeline
+              resume
             </Link>
             <Link
               to="/contact"
@@ -107,24 +90,6 @@ const Header: React.FC<HeaderProps> = ({ name, title }) => {
               onClick={closeMenu}
             >
               contact
-            </Link>
-            <Link
-              to="/globe"
-              className={`nav-link ${
-                location.pathname === "/globe" ? "active" : ""
-              }`}
-              onClick={closeMenu}
-            >
-              globe
-            </Link>
-            <Link
-              to="/ideas"
-              className={`nav-link ${
-                location.pathname === "/ideas" ? "active" : ""
-              }`}
-              onClick={closeMenu}
-            >
-              ideas
             </Link>
             <Link
               to="/books"

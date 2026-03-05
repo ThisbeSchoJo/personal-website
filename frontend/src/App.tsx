@@ -6,11 +6,8 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Header from "./components/Header";
 import AboutPage from "./pages/AboutPage";
 import ProjectsPage from "./pages/ProjectsPage";
-import SkillsPage from "./pages/SkillsPage";
-import TimelinePage from "./pages/TimelinePage";
+import ResumePage from "./pages/ResumePage";
 import ContactPage from "./pages/ContactPage";
-import GlobePage from "./pages/GlobePage";
-import IdeasPage from "./pages/IdeasPage";
 import BooksPage from "./pages/BooksPage";
 import { PortfolioData } from "./types";
 
@@ -27,54 +24,119 @@ function App() {
   useEffect(() => {
     const fetchPortfolioData = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/portfolio`);
+        const response = await axios.get(`${API_BASE_URL}/portfolio`, {
+          timeout: 10000, // 10s – avoid hanging if backend is down or slow
+        });
         setPortfolioData(response.data);
-        setLoading(false);
       } catch (err) {
         setError("Failed to load portfolio data");
-        setLoading(false);
         console.error("Error fetching portfolio data:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchPortfolioData();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <div className="spinner"></div>
-        <p>Loading portfolio...</p>
-      </div>
-    );
-  }
-
-  if (error || !portfolioData) {
-    return (
-      <div className="error-container">
-        <p>{error || "Portfolio data not available"}</p>
-      </div>
-    );
-  }
+  // Always render app shell (Router + Header + Routes) so nav works even when API fails or is slow.
+  // Other browsers/networks may block or fail the portfolio request (e.g. ad blockers, backend down).
+  const displayName = portfolioData?.name ?? "Portfolio";
+  const displayTitle = portfolioData?.title ?? "—";
+  const showGlobalError = !loading && (error || !portfolioData);
 
   return (
     <ThemeProvider>
       <Router>
         <div className="App">
-          <Header name={portfolioData.name} title={portfolioData.title} />
+          <Header name={displayName} title={displayTitle} />
           <main>
-            <Routes>
-              <Route path="/" element={<AboutPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/projects" element={<ProjectsPage />} />
-              <Route path="/portfolio" element={<ProjectsPage />} />
-              <Route path="/skills" element={<SkillsPage />} />
-              <Route path="/timeline" element={<TimelinePage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/globe" element={<GlobePage />} />
-              <Route path="/ideas" element={<IdeasPage />} />
-              <Route path="/books" element={<BooksPage />} />
-            </Routes>
+            {loading && !portfolioData && (
+              <div className="loading-container loading-in-main">
+                <div className="spinner"></div>
+                <p>Loading portfolio...</p>
+              </div>
+            )}
+            {showGlobalError && (
+              <div className="error-container error-in-main">
+                <p>{error || "Portfolio data not available"}</p>
+                <p className="error-hint">
+                  Check your connection or try again. Use the nav above to
+                  browse.
+                </p>
+              </div>
+            )}
+            {/* Routes always mount so nav links work; hide content during initial load to avoid double spinner */}
+            <div
+              className="main-content"
+              style={
+                loading && !portfolioData
+                  ? { visibility: "hidden", position: "absolute" }
+                  : undefined
+              }
+            >
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <AboutPage
+                      portfolioData={portfolioData}
+                      loading={loading}
+                      error={error}
+                    />
+                  }
+                />
+                <Route
+                  path="/projects"
+                  element={
+                    <ProjectsPage
+                      portfolioData={portfolioData}
+                      loading={loading}
+                      error={error}
+                    />
+                  }
+                />
+                <Route
+                  path="/portfolio"
+                  element={
+                    <ProjectsPage
+                      portfolioData={portfolioData}
+                      loading={loading}
+                      error={error}
+                    />
+                  }
+                />
+                <Route
+                  path="/resume"
+                  element={
+                    <ResumePage
+                      portfolioData={portfolioData}
+                      loading={loading}
+                      error={error}
+                    />
+                  }
+                />
+                <Route
+                  path="/contact"
+                  element={
+                    <ContactPage
+                      portfolioData={portfolioData}
+                      loading={loading}
+                      error={error}
+                    />
+                  }
+                />
+                <Route
+                  path="/books"
+                  element={
+                    <BooksPage
+                      goodreadsUserId={portfolioData?.goodreads_user_id}
+                      portfolioName={portfolioData?.name}
+                    />
+                  }
+                />
+              </Routes>
+            </div>
           </main>
         </div>
       </Router>
